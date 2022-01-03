@@ -1,5 +1,5 @@
-package br.com.ecommerce.projeto.domain;
-import br.com.ecommerce.projeto.domain.enums.Estado;
+package br.com.ecommerce.projeto.model.domain;
+import br.com.ecommerce.projeto.model.domain.enums.Estado;
 
 public class Cidade {
 

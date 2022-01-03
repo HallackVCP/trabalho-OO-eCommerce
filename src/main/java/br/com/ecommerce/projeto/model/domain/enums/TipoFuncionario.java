@@ -1,14 +1,14 @@
-package br.com.ecommerce.projeto.domain.enums;
+package br.com.ecommerce.projeto.model.domain.enums;
 
-public enum TipoCliente {
+public enum TipoFuncionario {
 
-    PESSOAFISICA(1, "Pessoa física"),
-    PESSOAJURIDICA(1, "Pessoa jurídica");
+    Administrador(1, "Admnistrador"),
+    Vendedor(1, "Vendedor");
 
     private int cod;
     private String descricao;
 
-    TipoCliente(int cod, String descricao) {
+    TipoFuncionario(int cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }
@@ -28,11 +28,11 @@ public enum TipoCliente {
     public void setCod(int cod) {
         this.cod = cod;
     }
-    public static TipoCliente toEnum(Integer cod) {
+    public static TipoFuncionario toEnum(Integer cod) {
         if(cod == null) {
             return null;
         }
-        for(TipoCliente x : TipoCliente.values()) {
+        for(TipoFuncionario x : TipoFuncionario.values()) {
             if(cod.equals(x.getCod())) {
                 return x;
             }

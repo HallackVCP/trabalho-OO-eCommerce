@@ -1,4 +1,4 @@
-package br.com.ecommerce.projeto.domain.enums;
+package br.com.ecommerce.projeto.model.domain.enums;
 
 public enum Estado {
 

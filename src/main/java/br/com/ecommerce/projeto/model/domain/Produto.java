@@ -1,4 +1,4 @@
-package br.com.ecommerce.projeto.domain;
+package br.com.ecommerce.projeto.model.domain;
 
 public class Produto {
     private String nome;

@@ -1,9 +1,7 @@
-package br.com.ecommerce.projeto.domain;
+package br.com.ecommerce.projeto.model.domain;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class Pedido implements Iterable<Produto> {
     private Integer codigo;

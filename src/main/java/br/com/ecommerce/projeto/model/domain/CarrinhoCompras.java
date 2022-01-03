@@ -1,6 +1,4 @@
-package br.com.ecommerce.projeto.domain;
-
-import java.util.List;
+package br.com.ecommerce.projeto.model.domain;
 
 public class CarrinhoCompras {
     private Cliente cliente;

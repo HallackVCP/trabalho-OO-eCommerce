@@ -1,4 +1,4 @@
-package br.com.ecommerce.projeto.domain;
+package br.com.ecommerce.projeto.model.domain;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
