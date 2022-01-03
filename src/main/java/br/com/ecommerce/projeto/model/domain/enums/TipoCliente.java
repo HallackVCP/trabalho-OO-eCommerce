@@ -3,7 +3,7 @@ package br.com.ecommerce.projeto.model.domain.enums;
 public enum TipoCliente {
 
     PESSOAFISICA(1, "Pessoa física"),
-    PESSOAJURIDICA(1, "Pessoa jurídica");
+    PESSOAJURIDICA(2, "Pessoa jurídica");
 
     private int cod;
     private String descricao;

@@ -3,7 +3,7 @@ package br.com.ecommerce.projeto.model.domain.enums;
 public enum TipoFuncionario {
 
     Administrador(1, "Admnistrador"),
-    Vendedor(1, "Vendedor");
+    Vendedor(2, "Vendedor");
 
     private int cod;
     private String descricao;

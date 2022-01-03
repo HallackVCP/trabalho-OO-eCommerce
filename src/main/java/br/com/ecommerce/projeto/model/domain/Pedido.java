@@ -5,18 +5,17 @@ import java.util.Iterator;
 
 public class Pedido implements Iterable<Produto> {
     private Integer codigo;
-    private Produtos produtos;
+    private Listas<Produto> produtos;
     private LocalDate dataCompra;
-    private Integer qtd;
+    private Double precoTotal;
 
     public Pedido(){}
 
-    public Pedido(Integer codigo, LocalDate dataCompra, Integer qtd, Produto produto){
+    public Pedido(Integer codigo, LocalDate dataCompra, Produto produto){
         super();
         this.codigo = codigo;
         this.dataCompra = dataCompra;
-        this.qtd = qtd;
-        this.produtos = new Produtos(produto);
+        this.produtos = new Listas<>(produto);
     }
 
     public Integer getCodigo() {
@@ -27,11 +26,11 @@ public class Pedido implements Iterable<Produto> {
         this.codigo = codigo;
     }
 
-    public Produtos getProdutos() {
+    public Listas<Produto> getProdutos() {
         return produtos;
     }
 
-    public void Adicionar(Produto produto){produtos.adicionar(produto);}
+    public void Adicionar(Produto produto){produtos.Adicionar(produto);}
     public Iterator<Produto> iterator(){return produtos.iterator();}
 
     public LocalDate getDataCompra() {
@@ -42,11 +41,17 @@ public class Pedido implements Iterable<Produto> {
         this.dataCompra = dataCompra;
     }
 
-    public Integer getQtd() {
-        return qtd;
+
+
+    public Double getPrecoTotal() {
+        return precoTotal;
     }
 
-    public void setQtd(Integer qtd) {
-        this.qtd = qtd;
+    public void setPrecoTotal() {
+        double preco = 0;
+        for (Produto produto:produtos) {
+            preco += produto.getPreco()* produto.getQtd();
+        }
+        this.precoTotal = preco;
     }
 }
