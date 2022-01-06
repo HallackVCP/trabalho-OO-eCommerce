@@ -152,7 +152,7 @@ public class DeletarCidade extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void dmEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dmEstadoActionPerformed
-        dmEstado.
+
     }//GEN-LAST:event_dmEstadoActionPerformed
 
     /**

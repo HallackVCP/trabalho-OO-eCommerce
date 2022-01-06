@@ -15,7 +15,7 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
-        jButton [] btns = {jButton1, jButton2, jButton3, jButton4};
+        
     }
 
     /**
@@ -70,7 +70,6 @@ public class Home extends javax.swing.JFrame {
         pnSide.add(jPanel1);
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ecommerce/projeto/view/icons/dry-clean-50x50.png"))); // NOI18N
         jButton2.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +79,6 @@ public class Home extends javax.swing.JFrame {
         pnSide.add(jButton2);
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ecommerce/projeto/view/icons/domain-registration-50x50.png"))); // NOI18N
         jButton3.setToolTipText("");
         jButton3.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -91,7 +89,6 @@ public class Home extends javax.swing.JFrame {
         pnSide.add(jButton3);
 
         jButton4.setBackground(new java.awt.Color(255, 255, 255));
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ecommerce/projeto/view/icons/setting-50x50.png"))); // NOI18N
         jButton4.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +98,6 @@ public class Home extends javax.swing.JFrame {
         pnSide.add(jButton4);
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/ecommerce/projeto/view/icons/home-50x50.png"))); // NOI18N
         jButton1.setPreferredSize(new java.awt.Dimension(50, 50));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +134,7 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(pnCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(268, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCenterLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +149,7 @@ public class Home extends javax.swing.JFrame {
         pnCenterLayout.setVerticalGroup(
             pnCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnCenterLayout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(pnCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnCenterLayout.createSequentialGroup()
                         .addComponent(jCheckBox1)
