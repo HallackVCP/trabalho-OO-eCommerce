@@ -11,5 +11,8 @@
         <module name="trabalho-OO-eCommerce" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Projeto-E-commerce" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
