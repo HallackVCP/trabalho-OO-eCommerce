@@ -40,7 +40,7 @@ public class CadastroCidade extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Cidade");
         setBackground(new java.awt.Color(204, 204, 204));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -80,12 +80,12 @@ public class CadastroCidade extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(215, 215, 215)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(68, 68, 68)
                     .addComponent(jLabel4)
-                    .addContainerGap(418, Short.MAX_VALUE)))
+                    .addContainerGap(417, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,13 +108,16 @@ public class CadastroCidade extends javax.swing.JFrame {
                     .addContainerGap(161, Short.MAX_VALUE)))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 540, 290));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(90, 60, 539, 290);
 
         bg.setBackground(new java.awt.Color(3, 4, 34));
-        getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 410));
+        getContentPane().add(bg);
+        bg.setBounds(0, 0, 720, 410);
 
         jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, -1));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(320, 80, 37, 16);
 
         jPanel2.setBackground(new java.awt.Color(51, 0, 102));
 
@@ -129,7 +132,8 @@ public class CadastroCidade extends javax.swing.JFrame {
             .addGap(0, 410, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 410));
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 710, 410);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

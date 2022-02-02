@@ -45,7 +45,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Cidade");
         setBackground(new java.awt.Color(204, 204, 204));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -60,7 +60,6 @@ public class CadastroProduto extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(3, 4, 34));
         jButton1.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         jButton1.setText("Cadastrar");
-        jButton1.setForeground(Color.white);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -77,7 +76,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Calibri Light", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel7.setText("Preï¿½o");
+        jLabel7.setText("Preço");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -134,10 +133,12 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addGap(31, 31, 31))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 540, 290));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(90, 60, 533, 290);
 
         jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, -1));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(320, 80, 37, 16);
 
         jPanel2.setBackground(new java.awt.Color(51, 0, 102));
 
@@ -152,7 +153,8 @@ public class CadastroProduto extends javax.swing.JFrame {
             .addGap(0, 410, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 410));
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 730, 410);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

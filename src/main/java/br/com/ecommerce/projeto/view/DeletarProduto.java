@@ -40,7 +40,7 @@ public class DeletarProduto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Cidade");
         setBackground(new java.awt.Color(204, 204, 204));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -109,13 +109,16 @@ public class DeletarProduto extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 540, 290));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(90, 60, 533, 290);
 
         bg.setBackground(new java.awt.Color(51, 0, 102));
-        getContentPane().add(bg, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 410));
+        getContentPane().add(bg);
+        bg.setBounds(0, 0, 720, 410);
 
         jLabel1.setText("jLabel1");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 80, -1, -1));
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(320, 80, 37, 16);
 
         jPanel2.setBackground(new java.awt.Color(51, 0, 102));
 
@@ -130,7 +133,8 @@ public class DeletarProduto extends javax.swing.JFrame {
             .addGap(0, 410, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 410));
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 740, 410);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
