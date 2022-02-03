@@ -7,6 +7,5 @@
 	</contentEntry>
 	<levels>
 		<level name="Maven: org.jetbrains:annotations:23.0.0" value="project"/>
-		<level name="Maven: unknown.binary:AbsoluteLayout:SNAPSHOT" value="project"/>
 	</levels>
 </component>

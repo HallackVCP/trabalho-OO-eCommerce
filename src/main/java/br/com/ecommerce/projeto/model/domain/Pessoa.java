@@ -18,6 +18,12 @@ public abstract class Pessoa {
         this.idade= idade;
         this.dataNascimento = dataNascimento;
     }
+    public Pessoa(String nome, String email, Cidade cidade, Integer Idade){
+        this.nome = nome;
+        this.email = email;
+        this.cidade = cidade;
+        this.idade= idade;
+    }
 
     public String getNome() {
         return nome;

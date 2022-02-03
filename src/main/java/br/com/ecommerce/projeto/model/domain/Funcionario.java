@@ -1,5 +1,7 @@
 package br.com.ecommerce.projeto.model.domain;
 
+import br.com.ecommerce.projeto.model.domain.enums.TipoFuncionario;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -10,12 +12,23 @@ public class Funcionario extends Pessoa{
 
     public Funcionario(){}
 
-    public Funcionario(Integer matricula, String nome, String email, Integer tipo, Cidade cidade, double salario, Integer idade, LocalDate dataNascimento) {
-        super(nome, email, cidade, idade, dataNascimento);
+    public Funcionario(Integer matricula, String nome, String email, Integer tipo,
+                       Cidade cidade, double salario, Integer idade) {
+        super(nome, email, cidade, idade);
         this.matricula = matricula;
         this.tipo = tipo;
         this.salario = salario;
     }
+
+    public Funcionario(Integer matricula, String nome, String email, TipoFuncionario tipo,
+                       Cidade cidade, double salario, Integer idade) {
+        super(nome, email, cidade, idade);
+        this.matricula = matricula;
+        this.tipo = tipo.getCod();
+        this.salario = salario;
+    }
+
+
 
     public Integer getMatricula() {
         return matricula;
@@ -27,8 +40,9 @@ public class Funcionario extends Pessoa{
 
 
 
-    public Integer getTipo() {
-        return tipo;
+    public TipoFuncionario getTipo() {
+
+        return TipoFuncionario.toEnum(tipo);
     }
 
     public void setTipo(int tipo) {

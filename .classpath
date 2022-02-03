@@ -18,6 +18,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.jetbrains:annotations:23.0.0"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: unknown.binary:AbsoluteLayout:SNAPSHOT"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

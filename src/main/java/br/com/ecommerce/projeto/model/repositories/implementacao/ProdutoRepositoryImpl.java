@@ -7,11 +7,12 @@ import java.io.*;
 import java.util.List;
 
 public class ProdutoRepositoryImpl implements ProdutoRepository {
-
+    private Produto produto;
     BufferedWriter bw = new BufferedWriter(new FileWriter("produto_db.txt", true));
     BufferedReader br = new BufferedReader(new FileReader("produto_db.txt"));
 
-    public ProdutoRepositoryImpl() throws IOException {
+    public ProdutoRepositoryImpl(Produto produto) throws IOException {
+        this.produto = produto;
     }
 
     @Override
@@ -25,8 +26,12 @@ public class ProdutoRepositoryImpl implements ProdutoRepository {
     }
 
     @Override
-    public void adicionarproduto(Produto produto) {
-
+    public void adicionarproduto(Produto produto) throws IOException {
+        bw.write(produto.getCodigoProduto()+", "+produto.getNome()+","
+                +produto.getPreco()+","+produto.getQtd());
+        bw.flush();
+        bw.newLine();
+        bw.close();
     }
 
     @Override

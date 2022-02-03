@@ -8,11 +8,12 @@ import java.io.*;
 import java.util.List;
 
 public class CidadeRepositoryImpl implements CidadeRepository {
-
+    private Cidade cidade;
     BufferedWriter bw = new BufferedWriter(new FileWriter("cidade_db.txt", true));
     BufferedReader br = new BufferedReader(new FileReader("cidade_db.txt"));
 
-    public CidadeRepositoryImpl() throws IOException {
+    public CidadeRepositoryImpl(Cidade cidade) throws IOException {
+        this.cidade = cidade;
     }
 
     @Override
@@ -25,10 +26,7 @@ public class CidadeRepositoryImpl implements CidadeRepository {
         return null;
     }
 
-    @Override
-    public Cidade buscarCidadePorCodigo(String cod) {
-        return null;
-    }
+
 
     @Override
     public List<Cidade> buscarCidadePorEstado(Estado estado) {
@@ -36,8 +34,11 @@ public class CidadeRepositoryImpl implements CidadeRepository {
     }
 
     @Override
-    public void adicionarCidade(Cidade cidade) {
-
+    public void adicionarCidade(Cidade cidade) throws IOException {
+        bw.write(cidade.getNome()+","+cidade.getEstado());
+        bw.flush();
+        bw.newLine();
+        bw.close();
     }
 
     @Override
@@ -50,10 +51,7 @@ public class CidadeRepositoryImpl implements CidadeRepository {
         return null;
     }
 
-    @Override
-    public List<Cidade> deletarCidadePorCodigo(String cod) {
-        return null;
-    }
+
 
     @Override
     public List<Cidade> deletarCidadesPorEstado(Estado estado) {

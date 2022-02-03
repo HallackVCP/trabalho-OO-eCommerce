@@ -11,19 +11,23 @@ public class Cliente extends Pessoa{
     private String cpfOuCnpj;
     private Integer tipo;
     private SexoCliente sexo;
-    private CarrinhoCompras carrinhoCompras;
 
 
     public Cliente() {
     }
     public Cliente(String nome, String email, String cpfOuCnpj,
                    TipoCliente tipo, LocalDate dataNascimento, SexoCliente sexo, Integer idade, Cidade cidade) {
-        super(nome, email, cidade, idade, dataNascimento);
+        super(nome, email, cidade, idade);
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = tipo.getCod();
         this.sexo = sexo;
-        this.carrinhoCompras = new CarrinhoCompras();
-
+    }
+    public Cliente(String nome, String email, String cpfOuCnpj,
+                   Integer tipo, LocalDate dataNascimento, SexoCliente sexo, Integer idade, Cidade cidade){
+        super(nome, email, cidade, idade);
+        this.cpfOuCnpj = cpfOuCnpj;
+        this.tipo = tipo;
+        this.sexo = sexo;
     }
 
 
