@@ -3,35 +3,31 @@ package br.com.ecommerce.projeto.model.repositories.implementacao;
 import br.com.ecommerce.projeto.model.domain.Cidade;
 import br.com.ecommerce.projeto.model.domain.Funcionario;
 import br.com.ecommerce.projeto.model.domain.enums.TipoFuncionario;
-import br.com.ecommerce.projeto.model.repositories.FuncionarioRepository;
 
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class FuncionarioRepositoryImpl implements FuncionarioRepository {
-    private Funcionario funcionario;
+public class FuncionarioRepositoryImpl implements Repository<Funcionario> {
     File tempDB = new File("funcionario_temp_db.txt");
     File db = new File("funcionario_db.txt");
     BufferedWriter bw = new BufferedWriter(new FileWriter(db, true));
     BufferedReader br = new BufferedReader(new FileReader(db));
     BufferedWriter tempBW = new BufferedWriter(new FileWriter(tempDB));
-    public FuncionarioRepositoryImpl(Funcionario funcionario) throws IOException {
-        this.funcionario = funcionario;
+    public FuncionarioRepositoryImpl() throws IOException {
+
     }
 
-    @Override
-    public List<Funcionario> buscarTodosFuncionarios() {
-        return null;
-    }
+
+
 
     @Override
-    public Funcionario buscarFuncionarioPorCodigo(String matricula) throws IOException {
+    public Funcionario findByCod(String cod) throws IOException {
         String func;
         while((func = br.readLine())!=null){
-            if(func.contains(matricula)){
+            if(func.contains(cod)){
                 List<String> funcData = Arrays.asList(func.split(","));
-                Integer mat = Integer.parseInt(funcData.get(0));
+                String mat =(funcData.get(0));
                 String  tipoFuncionario= funcData.get(3);
                 TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
                 Integer tipo = type.getCod();
@@ -45,32 +41,32 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepository {
             }
             else{
                 return null;
-                //exception
+
             }
         }
         return null;
-        //exception
+
     }
 
     @Override
-    public void adicionarFuncionario(Funcionario funcionario) throws IOException {
-        bw.write(funcionario.getMatricula()+", "+funcionario.getNome()+","
-                +funcionario.getEmail()+","+","+ funcionario.getTipo()+","
-                +funcionario.getCidade().getNome()+","+
-                funcionario.getCidade().getEstado().getNome()+","+funcionario.getEmail()+
-                ","+funcionario.getIdade());
+    public void save(Funcionario obj) throws IOException {
+        bw.write(obj.getMatricula()+", "+obj.getNome()+","
+                +obj.getEmail()+","+","+ obj.getTipo()+","
+                +obj.getCidade().getNome()+","+
+                obj.getCidade().getEstado().getNome()+","+
+                ","+obj.getIdade());
         bw.flush();
         bw.newLine();
         bw.close();
     }
 
     @Override
-    public void atualizarFuncionario(Funcionario oldFuncionario, Funcionario newFuncionario) throws IOException {
+    public void update(Funcionario obj) throws IOException {
         String func;
 
         while((func = br.readLine())!=null){
             List<String> funcData = Arrays.asList(func.split(","));
-            Integer mat = Integer.parseInt(funcData.get(0));
+            String mat = (funcData.get(0));
             String  tipoFuncionario= funcData.get(3);
             TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
             Integer tipo = type.getCod();
@@ -80,15 +76,15 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepository {
             Cidade cidade = new Cidade(funcData.get(4), funcData.get(5));
             Funcionario funcionario1 =
                     new Funcionario(mat, funcData.get(1), funcData.get(2), tipo, cidade, salario, idade);
-            if(funcionario1.equals(oldFuncionario)){
-                funcionario1 = newFuncionario;
-                adicionarFuncionario(funcionario1);
+            if(funcionario1.equals(obj)){
+                delete(funcionario1);
+                save(obj);
             }
         }
     }
 
     @Override
-    public void deletarTodosFuncionarios() throws IOException {
+    public void deleteAll() throws IOException {
         String func = " ";
         while(br.readLine()!=null){
             tempBW.write(func);
@@ -102,10 +98,10 @@ public class FuncionarioRepositoryImpl implements FuncionarioRepository {
     }
 
     @Override
-    public void deletarFuncionarioPorCodigo(String matricula) throws IOException {
+    public void delete(Funcionario obj) throws IOException {
         String func;
         while((func = br.readLine())!=null){
-            if(func.contains(matricula)){
+            if(func.contains(obj.getMatricula())){
                 continue;
             }
             tempBW.write(func);

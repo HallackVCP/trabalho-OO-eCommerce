@@ -2,13 +2,13 @@ package br.com.ecommerce.projeto.model.domain;
 
 public class Produto {
     private String nome;
-    private Integer codigoProduto;
+    private String codigoProduto;
     private double preco;
     private Integer qtd;
 
     public Produto(){}
 
-    public Produto(String nome, Integer codigoProduto, double preco, Integer qtd) {
+    public Produto(String nome, String codigoProduto, double preco, Integer qtd) {
         super();
         this.nome = nome;
         this.codigoProduto = codigoProduto;
@@ -20,7 +20,7 @@ public class Produto {
         this.nome = nome;
         this.preco = preco;
     }
-    public Produto(String nome, Integer codigoProduto, double preco){
+    public Produto(String nome, String codigoProduto, double preco){
         super();
         this.nome = nome;
         this.codigoProduto = codigoProduto;
@@ -43,11 +43,11 @@ public class Produto {
         this.preco = preco;
     }
 
-    public Integer getCodigoProduto() {
+    public String getCodigoProduto() {
         return codigoProduto;
     }
 
-    public void setCodigoProduto(Integer codigoProduto) {
+    public void setCodigoProduto(String codigoProduto) {
         this.codigoProduto = codigoProduto;
     }
 
@@ -57,5 +57,20 @@ public class Produto {
 
     public void setQtd(Integer qtd) {
         this.qtd = qtd;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Produto produto = (Produto) o;
+
+        return codigoProduto != null ? codigoProduto.equals(produto.codigoProduto) : produto.codigoProduto == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return codigoProduto != null ? codigoProduto.hashCode() : 0;
     }
 }

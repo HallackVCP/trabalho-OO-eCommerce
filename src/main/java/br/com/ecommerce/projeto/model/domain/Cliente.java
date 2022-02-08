@@ -1,43 +1,31 @@
 package br.com.ecommerce.projeto.model.domain;
 
 
-import br.com.ecommerce.projeto.model.domain.enums.SexoCliente;
 import br.com.ecommerce.projeto.model.domain.enums.TipoCliente;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 public class Cliente extends Pessoa{
     private String cpfOuCnpj;
     private Integer tipo;
-    private SexoCliente sexo;
+
 
 
     public Cliente() {
     }
+
+
     public Cliente(String nome, String email, String cpfOuCnpj,
-                   TipoCliente tipo, LocalDate dataNascimento, SexoCliente sexo, Integer idade, Cidade cidade) {
-        super(nome, email, cidade, idade);
-        this.cpfOuCnpj = cpfOuCnpj;
-        this.tipo = tipo.getCod();
-        this.sexo = sexo;
-    }
-    public Cliente(String nome, String email, String cpfOuCnpj,
-                   Integer tipo, LocalDate dataNascimento, SexoCliente sexo, Integer idade, Cidade cidade){
+                   Integer tipo, Integer idade, Cidade cidade){
         super(nome, email, cidade, idade);
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = tipo;
-        this.sexo = sexo;
     }
-
-
-
-    public SexoCliente getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(SexoCliente sexo) {
-        this.sexo = sexo;
+    public Cliente(String nome, String email, String cpfOuCnpj,
+                   TipoCliente tipo, Integer idade, Cidade cidade){
+        super(nome, email, cidade, idade);
+        this.cpfOuCnpj = cpfOuCnpj;
+        this.tipo = tipo.getCod();
     }
 
 

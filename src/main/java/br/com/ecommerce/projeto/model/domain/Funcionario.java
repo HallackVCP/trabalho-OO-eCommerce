@@ -6,13 +6,13 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Funcionario extends Pessoa{
-    private Integer matricula;
+    private String matricula;
     private Integer tipo;
     private double salario;
 
     public Funcionario(){}
 
-    public Funcionario(Integer matricula, String nome, String email, Integer tipo,
+    public Funcionario(String matricula, String nome, String email, Integer tipo,
                        Cidade cidade, double salario, Integer idade) {
         super(nome, email, cidade, idade);
         this.matricula = matricula;
@@ -20,7 +20,7 @@ public class Funcionario extends Pessoa{
         this.salario = salario;
     }
 
-    public Funcionario(Integer matricula, String nome, String email, TipoFuncionario tipo,
+    public Funcionario(String matricula, String nome, String email, TipoFuncionario tipo,
                        Cidade cidade, double salario, Integer idade) {
         super(nome, email, cidade, idade);
         this.matricula = matricula;
@@ -30,11 +30,11 @@ public class Funcionario extends Pessoa{
 
 
 
-    public Integer getMatricula() {
+    public String getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(Integer matricula) {
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
 

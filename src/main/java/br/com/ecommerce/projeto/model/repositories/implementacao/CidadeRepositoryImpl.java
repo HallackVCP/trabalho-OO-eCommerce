@@ -1,60 +1,93 @@
 package br.com.ecommerce.projeto.model.repositories.implementacao;
 
 import br.com.ecommerce.projeto.model.domain.Cidade;
-import br.com.ecommerce.projeto.model.domain.enums.Estado;
-import br.com.ecommerce.projeto.model.repositories.CidadeRepository;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.List;
 
-public class CidadeRepositoryImpl implements CidadeRepository {
-    private Cidade cidade;
-    BufferedWriter bw = new BufferedWriter(new FileWriter("cidade_db.txt", true));
-    BufferedReader br = new BufferedReader(new FileReader("cidade_db.txt"));
+public class CidadeRepositoryImpl implements Repository<Cidade> {
+    File tempDB = new File("cidade_temp_db.txt");
+    File db = new File("cidade_db.txt");
+    BufferedWriter bw = new BufferedWriter(new FileWriter(db, true));
+    BufferedReader br = new BufferedReader(new FileReader(db));
+    BufferedWriter tempBW = new BufferedWriter(new FileWriter(tempDB));
 
-    public CidadeRepositoryImpl(Cidade cidade) throws IOException {
-        this.cidade = cidade;
+
+    public CidadeRepositoryImpl() throws IOException {
+
     }
 
     @Override
-    public List<Cidade> buscarTodosCidades() {
+    public Cidade findByCod(String cod) throws IOException {
+        String data;
+        while((data = br.readLine())!=null){
+            if(data.contains(cod)){
+                List<String> cdData = Arrays.asList(data.split(","));
+                String nome = cdData.get(0);
+                String estado = cdData.get(1);
+                Cidade cidade = new Cidade(nome, estado);
+                return cidade;
+            }
+        }
         return null;
     }
 
     @Override
-    public Cidade buscarCidadePorNome(String nome) {
-        return null;
-    }
-
-
-
-    @Override
-    public List<Cidade> buscarCidadePorEstado(Estado estado) {
-        return null;
-    }
-
-    @Override
-    public void adicionarCidade(Cidade cidade) throws IOException {
-        bw.write(cidade.getNome()+","+cidade.getEstado());
+    public void save(Cidade obj) throws IOException {
+        bw.write(obj.getNome()+","+obj.getEstado().getNome());
         bw.flush();
         bw.newLine();
         bw.close();
     }
 
     @Override
-    public void atualizarCidade(Cidade cidade) {
-
+    public void update(Cidade obj) throws IOException {
+        String data;
+        while((data = br.readLine())!=null){
+            if((data.contains(obj.getNome()))&&(data.contains(obj.getEstado().getNome()))){
+                List<String> cdData = Arrays.asList(data.split(","));
+                String nome = cdData.get(0);
+                String estado = cdData.get(1);
+                Cidade cidade = new Cidade(nome, estado);
+                if(obj.equals(cidade)){
+                    delete(cidade);
+                    save(obj);
+                }
+            }
+        }
     }
 
     @Override
-    public List<Cidade> deletarTodosCidades() {
-        return null;
+    public void delete(Cidade obj) throws IOException {
+        String data;
+        while((data = br.readLine())!=null){
+            if((data.contains(obj.getNome()))&&(data.contains(obj.getEstado().getNome()))){
+                continue;
+            }
+            tempBW.write(data);
+            tempBW.flush();
+            tempBW.newLine();
+        }
+        br.close();
+        tempBW.close();
+        db.delete();
+        tempDB.renameTo(db);
     }
-
-
 
     @Override
-    public List<Cidade> deletarCidadesPorEstado(Estado estado) {
-        return null;
+    public void deleteAll() throws IOException {
+        String data = " ";
+        while(br.readLine()!=null){
+            tempBW.write(data);
+            tempBW.flush();
+            tempBW.newLine();
+        }
+        br.close();
+        tempBW.close();
+        db.delete();
+        tempDB.renameTo(db);
     }
+
+
 }
