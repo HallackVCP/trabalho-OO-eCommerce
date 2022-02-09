@@ -3,8 +3,10 @@ package br.com.ecommerce.projeto.model.repositories.implementacao;
 import br.com.ecommerce.projeto.model.domain.Cidade;
 import br.com.ecommerce.projeto.model.domain.Funcionario;
 import br.com.ecommerce.projeto.model.domain.enums.TipoFuncionario;
+import br.com.ecommerce.projeto.model.repositories.Repository;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,7 +21,25 @@ public class FuncionarioRepositoryImpl implements Repository<Funcionario> {
     }
 
 
-
+    @Override
+    public List<Funcionario> findAll() throws IOException {
+        String func;
+        List<Funcionario> funcionarios = new ArrayList<>();
+        while((func=br.readLine())!=null){
+            List<String> funcData = Arrays.asList(func.split(","));
+            String mat =(funcData.get(0));
+            String  tipoFuncionario= funcData.get(3);
+            TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
+            Integer tipo = type.getCod();
+            Double sal = Double.parseDouble(funcData.get(6));
+            double salario = sal;
+            Cidade cidade = new Cidade(funcData.get(4), funcData.get(5));
+            Funcionario funcionario1 =
+                    new Funcionario(mat, funcData.get(1), funcData.get(2), tipo, cidade, salario);
+            funcionarios.add(funcionario1);
+        }
+        return funcionarios;
+    }
 
     @Override
     public Funcionario findByCod(String cod) throws IOException {
@@ -32,11 +52,10 @@ public class FuncionarioRepositoryImpl implements Repository<Funcionario> {
                 TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
                 Integer tipo = type.getCod();
                 Double sal = Double.parseDouble(funcData.get(6));
-                Integer idade = Integer.parseInt(funcData.get(7));
                 double salario = sal;
                 Cidade cidade = new Cidade(funcData.get(4), funcData.get(5));
                 Funcionario funcionario1 =
-                        new Funcionario(mat, funcData.get(1), funcData.get(2), tipo, cidade, salario, idade);
+                        new Funcionario(mat, funcData.get(1), funcData.get(2), tipo, cidade, salario);
                 return funcionario1;
             }
             else{
@@ -53,8 +72,7 @@ public class FuncionarioRepositoryImpl implements Repository<Funcionario> {
         bw.write(obj.getMatricula()+", "+obj.getNome()+","
                 +obj.getEmail()+","+","+ obj.getTipo()+","
                 +obj.getCidade().getNome()+","+
-                obj.getCidade().getEstado().getNome()+","+
-                ","+obj.getIdade());
+                obj.getCidade().getEstado().getNome());
         bw.flush();
         bw.newLine();
         bw.close();
@@ -71,11 +89,10 @@ public class FuncionarioRepositoryImpl implements Repository<Funcionario> {
             TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
             Integer tipo = type.getCod();
             Double sal = Double.parseDouble(funcData.get(6));
-            Integer idade = Integer.parseInt(funcData.get(7));
             double salario = sal;
             Cidade cidade = new Cidade(funcData.get(4), funcData.get(5));
             Funcionario funcionario1 =
-                    new Funcionario(mat, funcData.get(1), funcData.get(2), tipo, cidade, salario, idade);
+                    new Funcionario(mat, funcData.get(1), funcData.get(2), tipo, cidade, salario);
             if(funcionario1.equals(obj)){
                 delete(funcionario1);
                 save(obj);

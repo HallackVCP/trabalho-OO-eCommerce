@@ -1,8 +1,10 @@
 package br.com.ecommerce.projeto.model.repositories.implementacao;
 
 import br.com.ecommerce.projeto.model.domain.Cidade;
+import br.com.ecommerce.projeto.model.repositories.Repository;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,6 +18,20 @@ public class CidadeRepositoryImpl implements Repository<Cidade> {
 
     public CidadeRepositoryImpl() throws IOException {
 
+    }
+
+    @Override
+    public List<Cidade> findAll() throws IOException {
+        String data;
+        List<Cidade> cidades = new ArrayList<>();
+        while((data=br.readLine())!=null){
+            List<String> cdData = Arrays.asList(data.split(","));
+            String nome = cdData.get(0);
+            String estado = cdData.get(1);
+            Cidade cidade = new Cidade(nome, estado);
+            cidades.add(cidade);
+        }
+        return cidades;
     }
 
     @Override

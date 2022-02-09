@@ -1,8 +1,10 @@
 package br.com.ecommerce.projeto.model.repositories.implementacao;
 
 import br.com.ecommerce.projeto.model.domain.Produto;
+import br.com.ecommerce.projeto.model.repositories.Repository;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,6 +21,21 @@ public class ProdutoRepositoryImpl implements Repository<Produto> {
     }
 
 
+    @Override
+    public List<Produto> findAll() throws IOException {
+        String data;
+        List<Produto> produtos = new ArrayList<>();
+        while((data = br.readLine())!=null){
+            List<String> prodData = Arrays.asList(data.split(","));
+            String codProd = prodData.get(0);
+            String nome = prodData.get(1);
+            double preco = Double.parseDouble(prodData.get(2));
+            int qtd = Integer.parseInt(prodData.get(3));
+            Produto produto = new Produto(nome,codProd, preco, qtd);
+            produtos.add(produto);
+        }
+        return produtos;
+    }
 
     @Override
     public Produto findByCod(String cod) throws IOException {

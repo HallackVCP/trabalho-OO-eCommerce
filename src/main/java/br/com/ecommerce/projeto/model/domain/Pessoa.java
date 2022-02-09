@@ -6,24 +6,16 @@ public abstract class Pessoa {
     private String nome;
     private String email;
     private Cidade cidade;
-    private Integer idade;
-    private LocalDate dataNascimento;
+
 
     public Pessoa(){}
 
-    public Pessoa(String nome, String email, Cidade cidade, Integer Idade, LocalDate dataNascimento){
+    public Pessoa(String nome, String email, Cidade cidade){
         this.nome = nome;
         this.email = email;
         this.cidade = cidade;
-        this.idade= idade;
-        this.dataNascimento = dataNascimento;
     }
-    public Pessoa(String nome, String email, Cidade cidade, Integer Idade){
-        this.nome = nome;
-        this.email = email;
-        this.cidade = cidade;
-        this.idade= idade;
-    }
+
 
     public String getNome() {
         return nome;
@@ -49,19 +41,4 @@ public abstract class Pessoa {
         this.cidade = cidade;
     }
 
-    public Integer getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Integer idade) {
-        this.idade = idade;
-    }
-
-    public LocalDate getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(LocalDate dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
 }

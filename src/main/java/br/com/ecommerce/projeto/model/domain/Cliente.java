@@ -16,14 +16,14 @@ public class Cliente extends Pessoa{
 
 
     public Cliente(String nome, String email, String cpfOuCnpj,
-                   Integer tipo, Integer idade, Cidade cidade){
-        super(nome, email, cidade, idade);
+                   Integer tipo, Cidade cidade){
+        super(nome, email, cidade);
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = tipo;
     }
     public Cliente(String nome, String email, String cpfOuCnpj,
-                   TipoCliente tipo, Integer idade, Cidade cidade){
-        super(nome, email, cidade, idade);
+                   TipoCliente tipo, Cidade cidade){
+        super(nome, email, cidade);
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = tipo.getCod();
     }

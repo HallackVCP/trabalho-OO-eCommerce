@@ -3,8 +3,10 @@ package br.com.ecommerce.projeto.model.repositories.implementacao;
 import br.com.ecommerce.projeto.model.domain.Cidade;
 import br.com.ecommerce.projeto.model.domain.Cliente;
 import br.com.ecommerce.projeto.model.domain.enums.TipoCliente;
+import br.com.ecommerce.projeto.model.repositories.Repository;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,6 +22,25 @@ public class ClienteRepositoryImpl implements Repository<Cliente> {
 
 
     @Override
+    public List<Cliente> findAll() throws IOException {
+        String data;
+
+        List<Cliente> clientes = new ArrayList<>();
+        while((data = br.readLine())!=null){
+            List<String> cliData = Arrays.asList(data.split(","));
+            String cpfOuCnpj = cliData.get(0);
+            String nome = cliData.get(1);
+            String email = cliData.get(2);
+            String tipo = cliData.get(3);
+            TipoCliente type = TipoCliente.valueOf(tipo);
+            Cidade cidade = new Cidade(cliData.get(4), cliData.get(5));
+            Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, cidade);
+            clientes.add(cliente);
+        }
+        return clientes;
+    }
+
+    @Override
     public Cliente findByCod(String cod) throws IOException {
         String data;
         while((data = br.readLine())!=null){
@@ -31,8 +52,7 @@ public class ClienteRepositoryImpl implements Repository<Cliente> {
                 String tipo = cliData.get(3);
                 TipoCliente type = TipoCliente.valueOf(tipo);
                 Cidade cidade = new Cidade(cliData.get(4), cliData.get(5));
-                int idade = Integer.parseInt(cliData.get(6));
-                Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, idade, cidade);
+                Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, cidade);
                 return cliente;
             }
         }
@@ -43,8 +63,7 @@ public class ClienteRepositoryImpl implements Repository<Cliente> {
     public void save(Cliente obj) throws IOException {
         bw.write(obj.getCpfOuCnpj()+", "+obj.getNome()+","
                 +obj.getEmail()+","+","+obj.getTipo()+
-                obj.getCidade().getNome()+","+obj.getCidade().getEstado().getNome()+","+
-                ","+obj.getIdade());
+                obj.getCidade().getNome()+","+obj.getCidade().getEstado().getNome());
         bw.flush();
         bw.newLine();
         bw.close();
@@ -62,8 +81,7 @@ public class ClienteRepositoryImpl implements Repository<Cliente> {
                 String tipo = cliData.get(3);
                 TipoCliente type = TipoCliente.valueOf(tipo);
                 Cidade cidade = new Cidade(cliData.get(4), cliData.get(5));
-                int idade = Integer.parseInt(cliData.get(6));
-                Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, idade, cidade);
+                Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, cidade);
                 if(cliente.equals(obj)){
                     delete(cliente);
                     save(obj);

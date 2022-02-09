@@ -13,16 +13,16 @@ public class Funcionario extends Pessoa{
     public Funcionario(){}
 
     public Funcionario(String matricula, String nome, String email, Integer tipo,
-                       Cidade cidade, double salario, Integer idade) {
-        super(nome, email, cidade, idade);
+                       Cidade cidade, double salario) {
+        super(nome, email, cidade);
         this.matricula = matricula;
         this.tipo = tipo;
         this.salario = salario;
     }
 
     public Funcionario(String matricula, String nome, String email, TipoFuncionario tipo,
-                       Cidade cidade, double salario, Integer idade) {
-        super(nome, email, cidade, idade);
+                       Cidade cidade, double salario) {
+        super(nome, email, cidade);
         this.matricula = matricula;
         this.tipo = tipo.getCod();
         this.salario = salario;
