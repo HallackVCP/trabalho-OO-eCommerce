@@ -4,17 +4,22 @@
  */
 package br.com.ecommerce.projeto.view;
 
+import javax.swing.ButtonGroup;
+
 /**
  *
  * @author vinib
  */
-public class telaFuncionarioGerente extends javax.swing.JFrame {
+public class telaClienteGerente extends javax.swing.JFrame {
 
     /**
      * Creates new form telaProdutoGerente
      */
-    public telaFuncionarioGerente() {
+    public telaClienteGerente() {
         initComponents();
+        ButtonGroup group = new ButtonGroup();
+        group.add(rbPFisica);
+        group.add(rbPJuridica);
     }
 
     /**
@@ -31,7 +36,7 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         btAdd = new javax.swing.JButton();
         btRemover1 = new javax.swing.JButton();
         lbProduto = new javax.swing.JLabel();
-        tfProduto = new javax.swing.JTextField();
+        tfCPF = new javax.swing.JTextField();
         tfCodigo = new javax.swing.JTextField();
         lbCodigo = new javax.swing.JLabel();
         lbQuantidade = new javax.swing.JLabel();
@@ -41,16 +46,13 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         lbEstado = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProdutoGerente = new javax.swing.JTable();
-        lbSalario = new javax.swing.JLabel();
-        tfSalario = new javax.swing.JTextField();
-        lbFuncao = new javax.swing.JLabel();
         btAdd1 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        rbPFisica = new javax.swing.JRadioButton();
+        rbPJuridica = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(790, 660));
-        setPreferredSize(new java.awt.Dimension(790, 660));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -70,10 +72,10 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         btRemover1.setText("Remover");
 
         lbProduto.setForeground(new java.awt.Color(0, 0, 0));
-        lbProduto.setText("Matricula");
+        lbProduto.setText("CPF/CNPJ");
 
-        tfProduto.setBackground(new java.awt.Color(255, 255, 255));
-        tfProduto.setForeground(new java.awt.Color(0, 0, 0));
+        tfCPF.setBackground(new java.awt.Color(255, 255, 255));
+        tfCPF.setForeground(new java.awt.Color(0, 0, 0));
 
         tfCodigo.setBackground(new java.awt.Color(255, 255, 255));
         tfCodigo.setForeground(new java.awt.Color(0, 0, 0));
@@ -99,20 +101,20 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         tbProdutoGerente.setBackground(new java.awt.Color(204, 204, 204));
         tbProdutoGerente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Matricula", "Nome", "E-mail", "Cidade", "Estado", "Salario", "Função"
+                "CPF/CNPJ", "Nome", "E-mail", "Cidade", "Estado", "PF/PJ"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, true, true, true
+                false, false, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -128,22 +130,7 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         if (tbProdutoGerente.getColumnModel().getColumnCount() > 0) {
             tbProdutoGerente.getColumnModel().getColumn(4).setResizable(false);
             tbProdutoGerente.getColumnModel().getColumn(4).setPreferredWidth(50);
-            tbProdutoGerente.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
-
-        lbSalario.setForeground(new java.awt.Color(0, 0, 0));
-        lbSalario.setText("Salário");
-
-        tfSalario.setBackground(new java.awt.Color(255, 255, 255));
-        tfSalario.setForeground(new java.awt.Color(0, 0, 0));
-        tfSalario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfSalarioActionPerformed(evt);
-            }
-        });
-
-        lbFuncao.setForeground(new java.awt.Color(0, 0, 0));
-        lbFuncao.setText("Função");
 
         btAdd1.setText("Calcular Bônus");
         btAdd1.addActionListener(new java.awt.event.ActionListener() {
@@ -154,7 +141,9 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        rbPFisica.setText("Pessoa Fisica");
+
+        rbPJuridica.setText("Pessoa Juridica");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -162,25 +151,24 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btAdd1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(lbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfProduto)
-                    .addComponent(lbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfCodigo)
-                    .addComponent(lbQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfQuantidade)
-                    .addComponent(lbValor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfValor)
-                    .addComponent(lbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btRemover1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfSalario)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btAdd1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                        .addComponent(tfCPF)
+                        .addComponent(lbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfCodigo)
+                        .addComponent(lbQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfQuantidade)
+                        .addComponent(lbValor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfValor)
+                        .addComponent(lbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btRemover1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lbProduto))
+                    .addComponent(rbPFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbPJuridica))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -194,7 +182,7 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbProduto)
                         .addGap(6, 6, 6)
-                        .addComponent(tfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(lbCodigo)
                         .addGap(6, 6, 6)
@@ -211,15 +199,11 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
                         .addComponent(lbEstado)
                         .addGap(8, 8, 8)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbPFisica)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbSalario)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(lbFuncao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
+                        .addComponent(rbPJuridica)
+                        .addGap(89, 89, 89)
                         .addComponent(btAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,10 +223,6 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
     private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btAddActionPerformed
-
-    private void tfSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSalarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfSalarioActionPerformed
 
     private void btAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdd1ActionPerformed
         // TODO add your handling code here:
@@ -265,21 +245,23 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(telaFuncionarioGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaClienteGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(telaFuncionarioGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaClienteGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(telaFuncionarioGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaClienteGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(telaFuncionarioGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaClienteGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaFuncionarioGerente().setVisible(true);
+                new telaClienteGerente().setVisible(true);
             }
         });
     }
@@ -290,21 +272,19 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
     private javax.swing.JButton btRemover;
     private javax.swing.JButton btRemover1;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbCodigo;
     private javax.swing.JLabel lbEstado;
-    private javax.swing.JLabel lbFuncao;
     private javax.swing.JLabel lbProduto;
     private javax.swing.JLabel lbQuantidade;
-    private javax.swing.JLabel lbSalario;
     private javax.swing.JLabel lbValor;
+    private javax.swing.JRadioButton rbPFisica;
+    private javax.swing.JRadioButton rbPJuridica;
     private javax.swing.JTable tbProdutoGerente;
+    private javax.swing.JTextField tfCPF;
     private javax.swing.JTextField tfCodigo;
-    private javax.swing.JTextField tfProduto;
     private javax.swing.JTextField tfQuantidade;
-    private javax.swing.JTextField tfSalario;
     private javax.swing.JTextField tfValor;
     // End of variables declaration//GEN-END:variables
 }

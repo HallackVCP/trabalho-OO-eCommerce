@@ -8,12 +8,12 @@ package br.com.ecommerce.projeto.view;
  *
  * @author vinib
  */
-public class telaProdutoGerente extends javax.swing.JFrame {
+public class telaGerenteProduto extends javax.swing.JFrame {
 
     /**
      * Creates new form telaProdutoGerente
      */
-    public telaProdutoGerente() {
+    public telaGerenteProduto() {
         initComponents();
     }
 
@@ -39,21 +39,25 @@ public class telaProdutoGerente extends javax.swing.JFrame {
         lbValor = new javax.swing.JLabel();
         tfValor = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbProdutoGerente = new javax.swing.JTable();
+        tbGerenteProduto = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(700, 500));
-        setPreferredSize(new java.awt.Dimension(700, 500));
+        setMinimumSize(new java.awt.Dimension(790, 660));
         setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(670, 410));
-        jPanel1.setMinimumSize(new java.awt.Dimension(700, 500));
-        jPanel1.setPreferredSize(new java.awt.Dimension(700, 500));
+        jPanel1.setMinimumSize(new java.awt.Dimension(790, 660));
+        jPanel1.setPreferredSize(new java.awt.Dimension(790, 660));
 
         btRemover.setText("Editar");
 
         btAdd.setText("Adicionar");
+        btAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddActionPerformed(evt);
+            }
+        });
 
         btRemover1.setText("Remover");
 
@@ -67,7 +71,7 @@ public class telaProdutoGerente extends javax.swing.JFrame {
         tfCodigo.setForeground(new java.awt.Color(0, 0, 0));
 
         lbCodigo.setForeground(new java.awt.Color(0, 0, 0));
-        lbCodigo.setText("Código");
+        lbCodigo.setText("Codigo");
 
         lbQuantidade.setForeground(new java.awt.Color(0, 0, 0));
         lbQuantidade.setText("Quantidade");
@@ -81,8 +85,8 @@ public class telaProdutoGerente extends javax.swing.JFrame {
         tfValor.setBackground(new java.awt.Color(255, 255, 255));
         tfValor.setForeground(new java.awt.Color(0, 0, 0));
 
-        tbProdutoGerente.setBackground(new java.awt.Color(204, 204, 204));
-        tbProdutoGerente.setModel(new javax.swing.table.DefaultTableModel(
+        tbGerenteProduto.setBackground(new java.awt.Color(204, 204, 204));
+        tbGerenteProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -96,13 +100,20 @@ public class telaProdutoGerente extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        tbProdutoGerente.setSelectionBackground(new java.awt.Color(51, 51, 255));
-        jScrollPane1.setViewportView(tbProdutoGerente);
+        tbGerenteProduto.setSelectionBackground(new java.awt.Color(51, 51, 255));
+        jScrollPane1.setViewportView(tbGerenteProduto);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -111,59 +122,61 @@ public class telaProdutoGerente extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbValor)
+                    .addComponent(lbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfProduto)
                     .addComponent(lbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCodigo)
+                    .addComponent(tfQuantidade)
+                    .addComponent(lbValor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfValor)
                     .addComponent(btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                     .addComponent(btRemover1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tfProduto)
-                    .addComponent(tfCodigo)
-                    .addComponent(tfQuantidade)
-                    .addComponent(lbQuantidade)
-                    .addComponent(tfValor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                    .addComponent(lbQuantidade))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbProduto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(tfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(lbCodigo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(lbQuantidade)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(tfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(lbValor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(263, 263, 263)
                         .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(btRemover1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(btRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(0, 0, 680, 450);
+        jPanel1.setBounds(0, 0, 790, 640);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,20 +195,23 @@ public class telaProdutoGerente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(telaProdutoGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaGerenteProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(telaProdutoGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaGerenteProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(telaProdutoGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaGerenteProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(telaProdutoGerente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(telaGerenteProduto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaProdutoGerente().setVisible(true);
+                new telaGerenteProduto().setVisible(true);
             }
         });
     }
@@ -210,7 +226,7 @@ public class telaProdutoGerente extends javax.swing.JFrame {
     private javax.swing.JLabel lbProduto;
     private javax.swing.JLabel lbQuantidade;
     private javax.swing.JLabel lbValor;
-    private javax.swing.JTable tbProdutoGerente;
+    private javax.swing.JTable tbGerenteProduto;
     private javax.swing.JTextField tfCodigo;
     private javax.swing.JTextField tfProduto;
     private javax.swing.JTextField tfQuantidade;
