@@ -8,6 +8,7 @@ import java.util.Objects;
 public class Cliente extends Pessoa{
     private String cpfOuCnpj;
     private Integer tipo;
+    private TipoCliente type;
 
 
 
@@ -20,11 +21,13 @@ public class Cliente extends Pessoa{
         super(nome, email, cidade);
         this.cpfOuCnpj = cpfOuCnpj;
         this.tipo = tipo;
+        this.type = TipoCliente.toEnum(tipo);
     }
     public Cliente(String nome, String email, String cpfOuCnpj,
                    TipoCliente tipo, Cidade cidade){
         super(nome, email, cidade);
         this.cpfOuCnpj = cpfOuCnpj;
+        this.type = tipo;
         this.tipo = tipo.getCod();
     }
 
