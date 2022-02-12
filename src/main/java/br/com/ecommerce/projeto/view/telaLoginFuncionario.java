@@ -4,6 +4,14 @@
  */
 package br.com.ecommerce.projeto.view;
 
+import br.com.ecommerce.projeto.controller.FuncionarioController;
+import br.com.ecommerce.projeto.model.domain.Funcionario;
+import br.com.ecommerce.projeto.model.domain.enums.TipoFuncionario;
+import br.com.ecommerce.projeto.model.exceptions.FuncionarioNaoEncontradoException;
+
+import javax.swing.*;
+import java.io.IOException;
+
 /**
  *
  * @author vinib
@@ -13,8 +21,11 @@ public class telaLoginFuncionario extends javax.swing.JFrame {
     /**
      * Creates new form telaLoginCliente
      */
-    public telaLoginFuncionario() {
+    static TipoFuncionario tipo;
+    public telaLoginFuncionario(TipoFuncionario tipo) {
         initComponents();
+        setLocationRelativeTo(this);
+        this.tipo = tipo;
     }
 
     /**
@@ -46,7 +57,11 @@ public class telaLoginFuncionario extends javax.swing.JFrame {
         jButton1.setText("ENTRAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+                    jButton1ActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -91,9 +106,37 @@ public class telaLoginFuncionario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_jButton1ActionPerformed
+        String matricula = jTextField1.getText();
+        try{
+            Funcionario funcionario = login(matricula);
+            if(tipo == TipoFuncionario.Administrador){
+                telaOpcoesGerente tela = new telaOpcoesGerente();
+                tela.setVisible(true);
+                this.setVisible(false);
+            }
+            else{
+                telaVendedorProduto tela = new telaVendedorProduto();
+                tela.setVisible(true);
+                this.setVisible(false);
+            }
+
+        } catch (FuncionarioNaoEncontradoException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private Funcionario login(String cod) throws IOException, FuncionarioNaoEncontradoException {
+        FuncionarioController controller = new FuncionarioController();
+        Funcionario funcionario = controller.findByCod(cod);
+        if(funcionario == null){
+            throw new FuncionarioNaoEncontradoException("Informacoes de login invalidas");
+        }
+        else{
+            return funcionario;
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -126,7 +169,7 @@ public class telaLoginFuncionario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaLoginFuncionario().setVisible(true);
+                new telaLoginFuncionario(tipo).setVisible(true);
             }
         });
     }

@@ -15,6 +15,7 @@ public class telaTipoCadastro extends javax.swing.JFrame {
      */
     public telaTipoCadastro() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**

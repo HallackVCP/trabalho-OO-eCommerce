@@ -46,6 +46,25 @@ public class CidadeRepositoryImpl implements Repository<Cidade> {
                 return cidade;
             }
         }
+        br.close();
+        return null;
+    }
+
+    @Override
+    public Cidade find(Cidade obj) throws IOException {
+        String data;
+        while((data = br.readLine())!=null){
+            if((data.contains(obj.getNome()))&&(data.contains(obj.getEstado().getNome()))){
+                List<String> cdData = Arrays.asList(data.split(","));
+                String nome = cdData.get(0);
+                String estado = cdData.get(1);
+                Cidade cidade = new Cidade(nome, estado);
+                if(obj.equals(cidade)){
+                    return cidade;
+                }
+            }
+        }
+        br.close();
         return null;
     }
 
@@ -72,6 +91,7 @@ public class CidadeRepositoryImpl implements Repository<Cidade> {
                 }
             }
         }
+        br.close();
     }
 
     @Override

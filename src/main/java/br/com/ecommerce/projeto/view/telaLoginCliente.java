@@ -4,6 +4,13 @@
  */
 package br.com.ecommerce.projeto.view;
 
+import br.com.ecommerce.projeto.controller.ClienteController;
+import br.com.ecommerce.projeto.model.domain.Cliente;
+import br.com.ecommerce.projeto.model.exceptions.ClienteNaoEncontradoException;
+
+import javax.swing.*;
+import java.io.IOException;
+
 /**
  *
  * @author vinib
@@ -15,6 +22,7 @@ public class telaLoginCliente extends javax.swing.JFrame {
      */
     public telaLoginCliente() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**
@@ -46,7 +54,11 @@ public class telaLoginCliente extends javax.swing.JFrame {
         jButton1.setText("ENTRAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+                    jButton1ActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -91,10 +103,29 @@ public class telaLoginCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_jButton1ActionPerformed
+        String cpfOuCnpj = jTextField1.getText();
+        try{
+            Cliente cliente = login(cpfOuCnpj);
+            telaOpcoesCliente tela = new telaOpcoesCliente(cliente);
+            tela.setVisible(true);
+            this.setVisible(false);
+        }catch(ClienteNaoEncontradoException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
 
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+    private Cliente login(String cod) throws IOException, ClienteNaoEncontradoException {
+        ClienteController controller = new ClienteController();
+        Cliente cliente = controller.findByCod(cod);
+        if(cliente == null){
+            throw new ClienteNaoEncontradoException("Informacoes de login invalidas");
+        }
+        else{
+            return cliente;
+        }
+    }
     /**
      * @param args the command line arguments
      */

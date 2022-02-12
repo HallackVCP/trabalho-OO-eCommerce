@@ -34,6 +34,7 @@ public class ProdutoRepositoryImpl implements Repository<Produto> {
             Produto produto = new Produto(nome,codProd, preco, qtd);
             produtos.add(produto);
         }
+        br.close();
         return produtos;
     }
 
@@ -51,6 +52,27 @@ public class ProdutoRepositoryImpl implements Repository<Produto> {
                 return produto;
             }
         }
+        br.close();
+        return null;
+    }
+
+    @Override
+    public Produto find(Produto obj) throws IOException {
+        String data;
+        while((data = br.readLine())!=null){
+            if(data.contains(obj.getCodigoProduto())){
+                List<String> prodData = Arrays.asList(data.split(","));
+                String codProd = prodData.get(0);
+                String nome = prodData.get(1);
+                double preco = Double.parseDouble(prodData.get(2));
+                int qtd = Integer.parseInt(prodData.get(3));
+                Produto produto = new Produto(nome,codProd, preco, qtd);
+                if(obj.equals(produto)){
+                    return produto;
+                }
+            }
+        }
+        br.close();
         return null;
     }
 
@@ -80,6 +102,7 @@ public class ProdutoRepositoryImpl implements Repository<Produto> {
                 }
             }
         }
+        br.close();
     }
 
     @Override

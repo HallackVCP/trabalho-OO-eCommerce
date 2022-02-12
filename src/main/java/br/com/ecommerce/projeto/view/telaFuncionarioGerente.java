@@ -15,6 +15,7 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
      */
     public telaFuncionarioGerente() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**
@@ -105,7 +106,7 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Matricula", "Nome", "E-mail", "Cidade", "Estado", "Salario", "Função"
+                "Matricula", "Nome", "E-mail", "Cidade", "Estado", "Salario", "Funï¿½ï¿½o"
             }
         ) {
             Class[] types = new Class [] {
@@ -132,7 +133,7 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         }
 
         lbSalario.setForeground(new java.awt.Color(0, 0, 0));
-        lbSalario.setText("Salário");
+        lbSalario.setText("Salï¿½rio");
 
         tfSalario.setBackground(new java.awt.Color(255, 255, 255));
         tfSalario.setForeground(new java.awt.Color(0, 0, 0));
@@ -143,9 +144,9 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         });
 
         lbFuncao.setForeground(new java.awt.Color(0, 0, 0));
-        lbFuncao.setText("Função");
+        lbFuncao.setText("Funï¿½ï¿½o");
 
-        btAdd1.setText("Calcular Bônus");
+        btAdd1.setText("Calcular Bï¿½nus");
         btAdd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAdd1ActionPerformed(evt);

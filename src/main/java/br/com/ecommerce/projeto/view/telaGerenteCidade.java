@@ -15,6 +15,7 @@ public class telaGerenteCidade extends javax.swing.JFrame {
      */
     public telaGerenteCidade() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**

@@ -4,6 +4,8 @@
  */
 package br.com.ecommerce.projeto.view;
 
+import br.com.ecommerce.projeto.model.domain.Cliente;
+
 /**
  *
  * @author vinib
@@ -13,8 +15,11 @@ public class telaOpcoesCliente extends javax.swing.JFrame {
     /**
      * Creates new form telaLoginCliente
      */
-    public telaOpcoesCliente() {
+    static Cliente cliente;
+    public telaOpcoesCliente(Cliente cliente) {
         initComponents();
+        setLocationRelativeTo(this);
+        this.cliente= cliente;
     }
 
     /**
@@ -90,13 +95,13 @@ public class telaOpcoesCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClienteActionPerformed
-        telaClienteCidade telaCliCidades = new telaClienteCidade();
+        telaClienteCidade telaCliCidades = new telaClienteCidade(cliente);
         telaCliCidades.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btClienteActionPerformed
 
     private void btProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProdutosActionPerformed
-        telaClienteProduto telaCliProduto = new telaClienteProduto();
+        telaClienteProduto telaCliProduto = new telaClienteProduto(cliente);
         telaCliProduto.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btProdutosActionPerformed
@@ -146,7 +151,7 @@ public class telaOpcoesCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaOpcoesCliente().setVisible(true);
+                new telaOpcoesCliente(cliente).setVisible(true);
             }
         });
     }

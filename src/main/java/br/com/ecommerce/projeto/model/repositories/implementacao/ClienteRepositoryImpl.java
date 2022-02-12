@@ -37,6 +37,7 @@ public class ClienteRepositoryImpl implements Repository<Cliente> {
             Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, cidade);
             clientes.add(cliente);
         }
+        br.close();
         return clientes;
     }
 
@@ -56,6 +57,29 @@ public class ClienteRepositoryImpl implements Repository<Cliente> {
                 return cliente;
             }
         }
+        br.close();
+        return null;
+    }
+
+    @Override
+    public Cliente find(Cliente obj) throws IOException {
+        String data;
+        while((data = br.readLine())!=null){
+            if(data.contains(obj.getCpfOuCnpj())){
+                List<String> cliData = Arrays.asList(data.split(","));
+                String cpfOuCnpj = cliData.get(0);
+                String nome = cliData.get(1);
+                String email = cliData.get(2);
+                String tipo = cliData.get(3);
+                TipoCliente type = TipoCliente.valueOf(tipo);
+                Cidade cidade = new Cidade(cliData.get(4), cliData.get(5));
+                Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, cidade);
+                if(cliente.equals(obj)){
+                    return cliente;
+                }
+            }
+        }
+        br.close();
         return null;
     }
 
@@ -88,8 +112,7 @@ public class ClienteRepositoryImpl implements Repository<Cliente> {
                 }
             }
         }
-
-
+        br.close();
     }
 
     @Override

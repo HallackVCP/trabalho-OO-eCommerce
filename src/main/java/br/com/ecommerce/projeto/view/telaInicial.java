@@ -15,6 +15,7 @@ public class telaInicial extends javax.swing.JFrame {
      */
     public telaInicial() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**
@@ -26,26 +27,26 @@ public class telaInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbCadastro = new javax.swing.JLabel();
-        btCliente = new javax.swing.JButton();
-        btFuncionario = new javax.swing.JButton();
+        lbOpcoes = new javax.swing.JLabel();
+        btCadastro = new javax.swing.JButton();
+        btLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lbCadastro.setFont(new java.awt.Font("sansserif", 0, 48)); // NOI18N
-        lbCadastro.setText("CADASTRO");
+        lbOpcoes.setFont(new java.awt.Font("sansserif", 0, 48)); // NOI18N
+        lbOpcoes.setText("INICIO");
 
-        btCliente.setText("Cliente");
-        btCliente.addActionListener(new java.awt.event.ActionListener() {
+        btCadastro.setText("Cadastro");
+        btCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btClienteActionPerformed(evt);
+                btCadastroActionPerformed(evt);
             }
         });
 
-        btFuncionario.setText("Funcionario");
-        btFuncionario.addActionListener(new java.awt.event.ActionListener() {
+        btLogin.setText("Login");
+        btLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFuncionarioActionPerformed(evt);
+                btLoginActionPerformed(evt);
             }
         });
 
@@ -58,37 +59,37 @@ public class telaInicial extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(166, 166, 166)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(129, 129, 129)
-                        .addComponent(lbCadastro)))
+                        .addComponent(lbOpcoes)))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(60, 60, 60)
-                .addComponent(lbCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbOpcoes, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
-                .addComponent(btCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(115, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClienteActionPerformed
-        telaCadastroCliente telaCadCliente = new telaCadastroCliente();
-        telaCadCliente.setVisible(true);
+    private void btCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClienteActionPerformed
+        telaTipoCadastro tela = new telaTipoCadastro();
+        tela.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btClienteActionPerformed
 
-    private void btFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFuncionarioActionPerformed
-        telaCadastroFuncionario telaCadFun = new telaCadastroFuncionario();
-        telaCadFun.setVisible(true);
+    private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFuncionarioActionPerformed
+        telaTipoLogin tela = new telaTipoLogin();
+        tela.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btFuncionarioActionPerformed
 
@@ -135,8 +136,8 @@ public class telaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btCliente;
-    private javax.swing.JButton btFuncionario;
-    private javax.swing.JLabel lbCadastro;
+    private javax.swing.JButton btCadastro;
+    private javax.swing.JButton btLogin;
+    private javax.swing.JLabel lbOpcoes;
     // End of variables declaration//GEN-END:variables
 }

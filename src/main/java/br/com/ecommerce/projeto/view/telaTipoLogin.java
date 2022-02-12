@@ -4,6 +4,8 @@
  */
 package br.com.ecommerce.projeto.view;
 
+import br.com.ecommerce.projeto.model.domain.enums.TipoFuncionario;
+
 /**
  *
  * @author vinib
@@ -15,6 +17,7 @@ public class telaTipoLogin extends javax.swing.JFrame {
      */
     public telaTipoLogin() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**
@@ -98,13 +101,13 @@ public class telaTipoLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btClienteActionPerformed
 
     private void btVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVendedorActionPerformed
-        telaLoginFuncionario telaLogFuncionario = new telaLoginFuncionario();
+        telaLoginFuncionario telaLogFuncionario = new telaLoginFuncionario(TipoFuncionario.Vendedor);
         telaLogFuncionario.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btVendedorActionPerformed
 
     private void btGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGerenteActionPerformed
-        telaLoginFuncionario telaLogFuncionario = new telaLoginFuncionario();
+        telaLoginFuncionario telaLogFuncionario = new telaLoginFuncionario(TipoFuncionario.Administrador);
         telaLogFuncionario.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btGerenteActionPerformed

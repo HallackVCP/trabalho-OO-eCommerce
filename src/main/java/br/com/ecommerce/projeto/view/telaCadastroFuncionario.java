@@ -17,6 +17,7 @@ public class telaCadastroFuncionario extends javax.swing.JFrame {
      */
     public telaCadastroFuncionario() {
         initComponents();
+        setLocationRelativeTo(this);
         ButtonGroup group = new ButtonGroup();
         group.add(rbGerente);
         group.add(rbVendedor);

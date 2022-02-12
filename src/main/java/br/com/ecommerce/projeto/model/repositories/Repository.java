@@ -7,6 +7,7 @@ public interface Repository <T>{
 
     public List<T> findAll() throws IOException;
     public T findByCod(String cod) throws IOException;
+    public T find(T obj) throws IOException;
     public void save(T obj) throws IOException;
     public void update(T obj) throws IOException;
     public void delete(T obj) throws IOException;

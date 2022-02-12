@@ -15,6 +15,7 @@ public class telaGerenteProduto extends javax.swing.JFrame {
      */
     public telaGerenteProduto() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**

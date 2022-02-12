@@ -15,6 +15,7 @@ public class telaVendedorProduto extends javax.swing.JFrame {
      */
     public telaVendedorProduto() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**

@@ -4,6 +4,8 @@
  */
 package br.com.ecommerce.projeto.view;
 
+import br.com.ecommerce.projeto.model.domain.Cliente;
+
 /**
  *
  * @author vinib
@@ -13,8 +15,12 @@ public class telaClienteCidade extends javax.swing.JFrame {
     /**
      * Creates new form telaProdutoGerente
      */
-    public telaClienteCidade() {
+
+    static Cliente cliente;
+    public telaClienteCidade(Cliente cliente) {
         initComponents();
+        setLocationRelativeTo(this);
+        this.cliente = cliente;
     }
 
     /**
@@ -129,7 +135,7 @@ public class telaClienteCidade extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaClienteCidade().setVisible(true);
+                new telaClienteCidade(cliente).setVisible(true);
             }
         });
     }

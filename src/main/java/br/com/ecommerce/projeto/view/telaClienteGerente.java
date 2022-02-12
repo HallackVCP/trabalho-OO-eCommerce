@@ -17,6 +17,7 @@ public class telaClienteGerente extends javax.swing.JFrame {
      */
     public telaClienteGerente() {
         initComponents();
+        setLocationRelativeTo(this);
         ButtonGroup group = new ButtonGroup();
         group.add(rbPFisica);
         group.add(rbPJuridica);
@@ -132,7 +133,7 @@ public class telaClienteGerente extends javax.swing.JFrame {
             tbProdutoGerente.getColumnModel().getColumn(4).setPreferredWidth(50);
         }
 
-        btAdd1.setText("Calcular Bônus");
+        btAdd1.setText("Calcular Bï¿½nus");
         btAdd1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAdd1ActionPerformed(evt);

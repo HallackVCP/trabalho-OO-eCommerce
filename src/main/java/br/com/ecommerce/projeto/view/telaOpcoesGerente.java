@@ -15,6 +15,7 @@ public class telaOpcoesGerente extends javax.swing.JFrame {
      */
     public telaOpcoesGerente() {
         initComponents();
+        setLocationRelativeTo(this);
     }
 
     /**

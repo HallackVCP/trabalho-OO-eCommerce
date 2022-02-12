@@ -38,6 +38,7 @@ public class FuncionarioRepositoryImpl implements Repository<Funcionario> {
                     new Funcionario(mat, funcData.get(1), funcData.get(2), tipo, cidade, salario);
             funcionarios.add(funcionario1);
         }
+        br.close();
         return funcionarios;
     }
 
@@ -63,8 +64,32 @@ public class FuncionarioRepositoryImpl implements Repository<Funcionario> {
 
             }
         }
+        br.close();
         return null;
 
+    }
+
+    @Override
+    public Funcionario find(Funcionario obj) throws IOException {
+        String func;
+
+        while((func = br.readLine())!=null){
+            List<String> funcData = Arrays.asList(func.split(","));
+            String mat = (funcData.get(0));
+            String  tipoFuncionario= funcData.get(3);
+            TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
+            Integer tipo = type.getCod();
+            Double sal = Double.parseDouble(funcData.get(6));
+            double salario = sal;
+            Cidade cidade = new Cidade(funcData.get(4), funcData.get(5));
+            Funcionario funcionario1 =
+                    new Funcionario(mat, funcData.get(1), funcData.get(2), tipo, cidade, salario);
+            if(funcionario1.equals(obj)){
+                return funcionario1;
+            }
+        }
+        br.close();
+        return null;
     }
 
     @Override
@@ -98,6 +123,7 @@ public class FuncionarioRepositoryImpl implements Repository<Funcionario> {
                 save(obj);
             }
         }
+        br.close();
     }
 
     @Override

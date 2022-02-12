@@ -17,6 +17,7 @@ public class telaCadastroCliente extends javax.swing.JFrame {
      */
     public telaCadastroCliente() {
         initComponents();
+        setLocationRelativeTo(this);
         ButtonGroup group = new ButtonGroup();
         group.add(rbPJuridica);
         group.add(rbPFisica);
