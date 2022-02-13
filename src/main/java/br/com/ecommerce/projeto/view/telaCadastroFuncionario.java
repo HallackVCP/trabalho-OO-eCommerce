@@ -4,7 +4,17 @@
  */
 package br.com.ecommerce.projeto.view;
 
-import javax.swing.ButtonGroup;
+import br.com.ecommerce.projeto.controller.ClienteController;
+import br.com.ecommerce.projeto.controller.FuncionarioController;
+import br.com.ecommerce.projeto.model.domain.Cidade;
+import br.com.ecommerce.projeto.model.domain.Cliente;
+import br.com.ecommerce.projeto.model.domain.Funcionario;
+import br.com.ecommerce.projeto.model.domain.enums.Estado;
+import br.com.ecommerce.projeto.model.domain.enums.TipoCliente;
+import br.com.ecommerce.projeto.model.domain.enums.TipoFuncionario;
+
+import javax.swing.*;
+import java.io.IOException;
 
 /**
  *
@@ -15,6 +25,7 @@ public class telaCadastroFuncionario extends javax.swing.JFrame {
     /**
      * Creates new form telaLoginCliente
      */
+    TipoFuncionario tipo;
     public telaCadastroFuncionario() {
         initComponents();
         setLocationRelativeTo(this);
@@ -45,7 +56,7 @@ public class telaCadastroFuncionario extends javax.swing.JFrame {
         optEstado = new javax.swing.JComboBox<>();
         rbVendedor = new javax.swing.JRadioButton();
         rbGerente = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        btCadastrar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         tfSalario = new javax.swing.JTextField();
@@ -59,7 +70,7 @@ public class telaCadastroFuncionario extends javax.swing.JFrame {
         jLabel1.setText("Nome");
 
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jLabel2.setText("CPF ou CNPJ");
+        jLabel2.setText("Matricula");
 
         jLabel3.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jLabel3.setText("E-mail");
@@ -99,7 +110,16 @@ public class telaCadastroFuncionario extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Cadastrar");
+        btCadastrar.setText("Cadastrar");
+        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    btCadastrarActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
         jLabel7.setText("Salario");
@@ -145,7 +165,7 @@ public class telaCadastroFuncionario extends javax.swing.JFrame {
                         .addComponent(lbCadastro))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(186, 186, 186)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -186,7 +206,7 @@ public class telaCadastroFuncionario extends javax.swing.JFrame {
                         .addGap(5, 5, 5)
                         .addComponent(rbGerente)))
                 .addGap(15, 15, 15)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -212,6 +232,75 @@ public class telaCadastroFuncionario extends javax.swing.JFrame {
     private void tfSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSalarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfSalarioActionPerformed
+
+    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btCadastrarActionPerformed
+        String nome = tfNome.getText();
+        String matricula = tfCPF.getText();
+        String email = tfEmail.getText();
+        String cidade = tfCidade.getText();
+        Estado estado = Estado.valueOf(optEstado.getSelectedItem().toString());
+        double salario = Double.parseDouble(tfSalario.getText());
+        TipoFuncionario type = this.tipo;
+        verificaCampoNome(nome);
+        verificaCampoMatricula(matricula);
+        verificaCampoEmail(email);
+        verificaCampoCidade(cidade);
+        Cidade city = new Cidade(cidade, estado);
+        Funcionario funcionario = new Funcionario(matricula, nome, email, type, city, salario);
+        FuncionarioController controller = new FuncionarioController();
+        controller.save(funcionario);
+        if(funcionario.getTipo() == TipoFuncionario.Administrador){
+            telaOpcoesGerente tela = new telaOpcoesGerente();
+            tela.setVisible(true);
+        }
+        else{
+            telaVendedorProduto tela = new telaVendedorProduto();
+            tela.setVisible(true);
+        }
+
+        this.setVisible(false);
+    }//GEN-LAST:event_btCadastrarActionPerformed
+
+    private void verificaCampoNome(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Nome vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Nome Preenchido com sucesso!");
+        }
+    }
+    private void verificaSalario(String var){
+        try{
+            Double.parseDouble(var);
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Campo salario preenchido de forma invalida!");
+        }
+    }
+    private void verificaCampoMatricula(String var){
+
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Matricula vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Matricula Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoEmail(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Email vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Email Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoCidade(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Cidade vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Cidade Preenchido com sucesso!");
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -264,7 +353,7 @@ public class telaCadastroFuncionario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btCadastrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

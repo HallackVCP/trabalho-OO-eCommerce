@@ -4,7 +4,14 @@
  */
 package br.com.ecommerce.projeto.view;
 
-import javax.swing.ButtonGroup;
+import br.com.ecommerce.projeto.controller.ClienteController;
+import br.com.ecommerce.projeto.model.domain.Cidade;
+import br.com.ecommerce.projeto.model.domain.Cliente;
+import br.com.ecommerce.projeto.model.domain.enums.Estado;
+import br.com.ecommerce.projeto.model.domain.enums.TipoCliente;
+
+import javax.swing.*;
+import java.io.IOException;
 
 /**
  *
@@ -15,6 +22,7 @@ public class telaCadastroCliente extends javax.swing.JFrame {
     /**
      * Creates new form telaLoginCliente
      */
+    static TipoCliente tipo;
     public telaCadastroCliente() {
         initComponents();
         setLocationRelativeTo(this);
@@ -45,7 +53,7 @@ public class telaCadastroCliente extends javax.swing.JFrame {
         optEstado = new javax.swing.JComboBox<>();
         rbPFisica = new javax.swing.JRadioButton();
         rbPJuridica = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        btCadastrar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -97,7 +105,16 @@ public class telaCadastroCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Cadastrar");
+        btCadastrar.setText("Cadastrar");
+        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    btCadastrarActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,11 +130,9 @@ public class telaCadastroCliente extends javax.swing.JFrame {
                         .addComponent(tfNome)
                         .addComponent(tfCPF)
                         .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rbPJuridica)
-                        .addGap(58, 58, 58))
+                    .addComponent(rbPJuridica)
                     .addComponent(rbPFisica))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
@@ -132,7 +147,7 @@ public class telaCadastroCliente extends javax.swing.JFrame {
                         .addComponent(lbCadastro))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(186, 186, 186)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -169,7 +184,7 @@ public class telaCadastroCliente extends javax.swing.JFrame {
                         .addGap(5, 5, 5)
                         .addComponent(rbPJuridica)))
                 .addGap(15, 15, 15)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -177,11 +192,15 @@ public class telaCadastroCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbPJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPJuridicaActionPerformed
-        // TODO add your handling code here:
+        if(rbPJuridica.isSelected()){
+            this.tipo = TipoCliente.PESSOAJURIDICA;
+        }
     }//GEN-LAST:event_rbPJuridicaActionPerformed
 
     private void rbPFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPFisicaActionPerformed
-        // TODO add your handling code here:
+        if(rbPFisica.isSelected()){
+            this.tipo = TipoCliente.PESSOAFISICA;
+        }
     }//GEN-LAST:event_rbPFisicaActionPerformed
 
     private void tfCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCidadeActionPerformed
@@ -191,6 +210,62 @@ public class telaCadastroCliente extends javax.swing.JFrame {
     private void optEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_optEstadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_optEstadoActionPerformed
+
+    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btCadastrarActionPerformed
+        String nome = tfNome.getText();
+        String cpfOuCnpj = tfCPF.getText();
+        String email = tfEmail.getText();
+        String cidade = tfCidade.getText();
+        Estado estado = Estado.valueOf(optEstado.getSelectedItem().toString());
+        TipoCliente type = this.tipo;
+        verificaCampoNome(nome);
+        verificaCampoCpfOuCNPJ(cpfOuCnpj);
+        verificaCampoEmail(email);
+        verificaCampoCidade(cidade);
+        Cidade city = new Cidade(cidade, estado);
+        Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, city);
+        ClienteController controller = new ClienteController();
+        controller.save(cliente);
+        telaOpcoesCliente tela = new telaOpcoesCliente(cliente);
+        tela.setVisible(true);
+        this.setVisible(false);
+
+    }//GEN-LAST:event_btCadastrarActionPerformed
+
+    private void verificaCampoNome(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Nome vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Nome Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoCpfOuCNPJ(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo CPF ou CNPJ vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo CPF ou CNPJ Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoEmail(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Email vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Email Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoCidade(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Cidade vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Cidade Preenchido com sucesso!");
+        }
+    }
+
+
 
     /**
      * @param args the command line arguments
@@ -235,7 +310,7 @@ public class telaCadastroCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btCadastrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -108,6 +108,9 @@ public class telaLoginFuncionario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_jButton1ActionPerformed
         String matricula = jTextField1.getText();
+        String nome = jTextField2.getText();
+        verificaCampoNome(nome);
+        verificaCampoMatricula(matricula);
         try{
             Funcionario funcionario = login(matricula);
             if(tipo == TipoFuncionario.Administrador){
@@ -135,6 +138,23 @@ public class telaLoginFuncionario extends javax.swing.JFrame {
         }
         else{
             return funcionario;
+        }
+    }
+
+    private void verificaCampoNome(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Nome vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Nome Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoMatricula(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Matricula vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Matricula Preenchido com sucesso!");
         }
     }
 

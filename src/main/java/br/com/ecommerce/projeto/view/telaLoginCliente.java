@@ -105,6 +105,9 @@ public class telaLoginCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_jButton1ActionPerformed
         String cpfOuCnpj = jTextField1.getText();
+        String nome = jTextField2.getText();
+        verificaCampoCpfOuCNPJ(cpfOuCnpj);
+        verificaCampoNome(nome);
         try{
             Cliente cliente = login(cpfOuCnpj);
             telaOpcoesCliente tela = new telaOpcoesCliente(cliente);
@@ -124,6 +127,22 @@ public class telaLoginCliente extends javax.swing.JFrame {
         }
         else{
             return cliente;
+        }
+    }
+    private void verificaCampoNome(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Nome vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Nome Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoCpfOuCNPJ(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo CPF ou CNPJ vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo CPF ou CNPJ Preenchido com sucesso!");
         }
     }
     /**
