@@ -53,20 +53,20 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btRemoverTodos" min="-2" pref="130" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btAdd1" pref="130" max="32767" attributes="0"/>
                           <Component id="tfCPF" max="32767" attributes="0"/>
                           <Component id="lbCodigo" min="-2" pref="41" max="-2" attributes="0"/>
-                          <Component id="tfCodigo" max="32767" attributes="0"/>
+                          <Component id="tfNome" max="32767" attributes="0"/>
                           <Component id="lbQuantidade" min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="tfQuantidade" max="32767" attributes="0"/>
+                          <Component id="tfEmail" max="32767" attributes="0"/>
                           <Component id="lbValor" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="tfValor" max="32767" attributes="0"/>
+                          <Component id="tfCidade" max="32767" attributes="0"/>
                           <Component id="lbEstado" min="-2" pref="39" max="-2" attributes="0"/>
-                          <Component id="btAdd" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btRemover1" max="32767" attributes="0"/>
+                          <Component id="btAdd" alignment="0" pref="130" max="32767" attributes="0"/>
                           <Component id="btRemover" max="32767" attributes="0"/>
-                          <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btEditar" max="32767" attributes="0"/>
+                          <Component id="optEstado" alignment="0" max="32767" attributes="0"/>
                           <Component id="lbProduto" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="rbPFisica" min="-2" pref="100" max="-2" attributes="0"/>
@@ -91,43 +91,46 @@
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Component id="lbCodigo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                          <Component id="tfCodigo" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfNome" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Component id="lbQuantidade" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                          <Component id="tfQuantidade" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfEmail" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Component id="lbValor" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                          <Component id="tfValor" min="-2" max="-2" attributes="0"/>
+                          <Component id="tfCidade" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Component id="lbEstado" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                          <Component id="optEstado" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="rbPFisica" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="rbPJuridica" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                          <Component id="btAdd1" min="-2" pref="40" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="btRemoverTodos" min="-2" pref="40" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="btAdd" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                          <Component id="btRemover1" min="-2" pref="40" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="btRemover" min="-2" pref="40" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="btEditar" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="43" max="32767" attributes="0"/>
+                  <EmptySpace pref="68" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btRemover">
+        <Component class="javax.swing.JButton" name="btEditar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Editar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btEditarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btAdd">
           <Properties>
@@ -137,88 +140,44 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAddActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btRemover1">
+        <Component class="javax.swing.JButton" name="btRemover">
           <Properties>
             <Property name="text" type="java.lang.String" value="Remover"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btRemoverActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lbProduto">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="CPF/CNPJ"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="tfCPF">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
-          </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfCodigo">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="tfNome">
         </Component>
         <Component class="javax.swing.JLabel" name="lbCodigo">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Nome"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lbQuantidade">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="E-mail"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfQuantidade">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="tfEmail">
         </Component>
         <Component class="javax.swing.JLabel" name="lbValor">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Cidade"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tfValor">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="tfCidade">
         </Component>
         <Component class="javax.swing.JLabel" name="lbEstado">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Estado"/>
           </Properties>
         </Component>
@@ -229,7 +188,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tbProdutoGerente">
+            <Component class="javax.swing.JTable" name="tbClienteGerente">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -288,15 +247,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="btAdd1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Calcular B&#xf4;nus"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAdd1ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="optEstado">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="27">
@@ -338,11 +289,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Pessoa Fisica"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbPFisicaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JRadioButton" name="rbPJuridica">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pessoa Juridica"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbPJuridicaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btRemoverTodos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Remover todos"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btRemoverTodosActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

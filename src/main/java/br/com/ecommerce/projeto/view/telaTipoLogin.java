@@ -107,7 +107,7 @@ public class telaTipoLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btVendedorActionPerformed
 
     private void btGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGerenteActionPerformed
-        telaLoginFuncionario telaLogFuncionario = new telaLoginFuncionario(TipoFuncionario.Administrador);
+        telaLoginFuncionario telaLogFuncionario = new telaLoginFuncionario(TipoFuncionario.Gerente);
         telaLogFuncionario.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btGerenteActionPerformed

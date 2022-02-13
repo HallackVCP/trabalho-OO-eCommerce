@@ -95,9 +95,9 @@ public class FuncionarioRepositoryImpl implements Repository<Funcionario> {
     @Override
     public void save(Funcionario obj) throws IOException {
         bw.write(obj.getMatricula()+", "+obj.getNome()+","
-                +obj.getEmail()+","+","+ obj.getTipo()+","
+                +obj.getEmail()+","+ obj.getTipo()+","
                 +obj.getCidade().getNome()+","+
-                obj.getCidade().getEstado().getNome());
+                obj.getCidade().getEstado().getNome()+","+obj.getSalario());
         bw.flush();
         bw.newLine();
         bw.close();

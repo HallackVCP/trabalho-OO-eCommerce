@@ -4,6 +4,18 @@
  */
 package br.com.ecommerce.projeto.view;
 
+import br.com.ecommerce.projeto.controller.FuncionarioController;
+import br.com.ecommerce.projeto.model.domain.Cidade;
+import br.com.ecommerce.projeto.model.domain.Funcionario;
+import br.com.ecommerce.projeto.model.domain.enums.Estado;
+import br.com.ecommerce.projeto.model.domain.enums.TipoFuncionario;
+import br.com.ecommerce.projeto.model.services.GerenteService;
+import br.com.ecommerce.projeto.model.services.VendedorService;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.io.IOException;
+
 /**
  *
  * @author vinib
@@ -28,73 +40,79 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btRemover = new javax.swing.JButton();
+        btEditar = new javax.swing.JButton();
         btAdd = new javax.swing.JButton();
-        btRemover1 = new javax.swing.JButton();
+        btRemover = new javax.swing.JButton();
         lbProduto = new javax.swing.JLabel();
-        tfProduto = new javax.swing.JTextField();
-        tfCodigo = new javax.swing.JTextField();
+        tfMatricula = new javax.swing.JTextField();
+        tfNome = new javax.swing.JTextField();
         lbCodigo = new javax.swing.JLabel();
         lbQuantidade = new javax.swing.JLabel();
-        tfQuantidade = new javax.swing.JTextField();
+        tfEmail = new javax.swing.JTextField();
         lbValor = new javax.swing.JLabel();
-        tfValor = new javax.swing.JTextField();
+        tfCidade = new javax.swing.JTextField();
         lbEstado = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProdutoGerente = new javax.swing.JTable();
         lbSalario = new javax.swing.JLabel();
         tfSalario = new javax.swing.JTextField();
         lbFuncao = new javax.swing.JLabel();
-        btAdd1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        btCalcBonus = new javax.swing.JButton();
+        optEstado = new javax.swing.JComboBox<>();
+        optFuncao = new javax.swing.JComboBox<>();
+        btVoltar = new javax.swing.JButton();
+        btRemoverTodos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(790, 660));
-        setPreferredSize(new java.awt.Dimension(790, 660));
+        setMinimumSize(new java.awt.Dimension(850, 660));
         setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setMaximumSize(new java.awt.Dimension(670, 410));
-        jPanel1.setMinimumSize(new java.awt.Dimension(790, 660));
-        jPanel1.setPreferredSize(new java.awt.Dimension(790, 660));
+        jPanel1.setMinimumSize(new java.awt.Dimension(850, 660));
+        jPanel1.setPreferredSize(new java.awt.Dimension(850, 660));
 
-        btRemover.setText("Editar");
+        btEditar.setText("Editar");
+        btEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    btEditarActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         btAdd.setText("Adicionar");
         btAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAddActionPerformed(evt);
+                try {
+                    btAddActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
-        btRemover1.setText("Remover");
+        btRemover.setText("Remover");
+        btRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    btRemoverActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-        lbProduto.setForeground(new java.awt.Color(0, 0, 0));
         lbProduto.setText("Matricula");
 
-        tfProduto.setBackground(new java.awt.Color(255, 255, 255));
-        tfProduto.setForeground(new java.awt.Color(0, 0, 0));
-
-        tfCodigo.setBackground(new java.awt.Color(255, 255, 255));
-        tfCodigo.setForeground(new java.awt.Color(0, 0, 0));
-
-        lbCodigo.setForeground(new java.awt.Color(0, 0, 0));
         lbCodigo.setText("Nome");
 
-        lbQuantidade.setForeground(new java.awt.Color(0, 0, 0));
         lbQuantidade.setText("E-mail");
 
-        tfQuantidade.setBackground(new java.awt.Color(255, 255, 255));
-        tfQuantidade.setForeground(new java.awt.Color(0, 0, 0));
-
-        lbValor.setForeground(new java.awt.Color(0, 0, 0));
         lbValor.setText("Cidade");
 
-        tfValor.setBackground(new java.awt.Color(255, 255, 255));
-        tfValor.setForeground(new java.awt.Color(0, 0, 0));
-
-        lbEstado.setForeground(new java.awt.Color(0, 0, 0));
         lbEstado.setText("Estado");
 
         tbProdutoGerente.setBackground(new java.awt.Color(204, 204, 204));
@@ -106,7 +124,7 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Matricula", "Nome", "E-mail", "Cidade", "Estado", "Salario", "Fun��o"
+                "Matricula", "Nome", "E-mail", "Cidade", "Estado", "Salario", "Funcao"
             }
         ) {
             Class[] types = new Class [] {
@@ -132,30 +150,44 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
             tbProdutoGerente.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
-        lbSalario.setForeground(new java.awt.Color(0, 0, 0));
-        lbSalario.setText("Sal�rio");
+        lbSalario.setText("Salario");
 
-        tfSalario.setBackground(new java.awt.Color(255, 255, 255));
-        tfSalario.setForeground(new java.awt.Color(0, 0, 0));
         tfSalario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfSalarioActionPerformed(evt);
             }
         });
 
-        lbFuncao.setForeground(new java.awt.Color(0, 0, 0));
-        lbFuncao.setText("Fun��o");
+        lbFuncao.setText("Funcao");
 
-        btAdd1.setText("Calcular B�nus");
-        btAdd1.addActionListener(new java.awt.event.ActionListener() {
+        btCalcBonus.setText("Calcular Bonus");
+        btCalcBonus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAdd1ActionPerformed(evt);
+                btCalcBonusActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
+        optEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        optFuncao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Gerente", "Vendedor" }));
+
+        btVoltar.setText("Voltar");
+        btVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVoltarActionPerformed(evt);
+            }
+        });
+
+        btRemoverTodos.setText("Remover todos");
+        btRemoverTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    btRemoverTodosActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -163,55 +195,61 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btAdd1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(lbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfProduto)
-                    .addComponent(lbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfCodigo)
-                    .addComponent(lbQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfQuantidade)
-                    .addComponent(lbValor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfValor)
-                    .addComponent(lbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btRemover1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lbFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfSalario)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btCalcBonus, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                .addComponent(lbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfMatricula)
+                                .addComponent(lbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfNome)
+                                .addComponent(lbQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfEmail)
+                                .addComponent(lbValor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(tfCidade)
+                                .addComponent(lbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfSalario)
+                                .addComponent(optEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(optFuncao, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btRemoverTodos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbProduto)
                         .addGap(6, 6, 6)
-                        .addComponent(tfProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(lbCodigo)
                         .addGap(6, 6, 6)
-                        .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(lbQuantidade)
                         .addGap(6, 6, 6)
-                        .addComponent(tfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(lbValor)
                         .addGap(6, 6, 6)
-                        .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(lbEstado)
                         .addGap(8, 8, 8)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(optEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbSalario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -219,16 +257,21 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(lbFuncao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(btAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(optFuncao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addComponent(btRemoverTodos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btCalcBonus, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
                         .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(btRemover1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(btRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addGap(4, 4, 4)
+                        .addComponent(btRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btVoltar)
+                .addGap(79, 79, 79))
         );
 
         getContentPane().add(jPanel1);
@@ -237,17 +280,158 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
-        // TODO add your handling code here:
+    private void btAddActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btAddActionPerformed
+        String nome = tfNome.getText();
+        String matricula = tfMatricula.getText();
+        String salario = tfSalario.getText();
+        String email = tfEmail.getText();
+        String cidade = tfCidade.getText();
+        String estado = optEstado.getSelectedItem().toString();
+        verificaCampoCidade(cidade);
+        verificaCampoEmail(email);
+        verificaCampoMatricula(matricula);
+        verificaCampoNome(nome);
+        verificaCampoSalario(salario);
+        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
+        TipoFuncionario tipo = TipoFuncionario.valueOf(optFuncao.toString());
+        double sal = Double.parseDouble(salario);
+        Funcionario funcionario = new Funcionario(matricula, nome, email, tipo, city, sal);
+        FuncionarioController controller = new FuncionarioController();
+        controller.save(funcionario);
+        DefaultTableModel model = (DefaultTableModel) tbProdutoGerente.getModel();
+        model.addRow(new Object[]{funcionario.getMatricula(), funcionario.getNome(),
+                funcionario.getEmail(), funcionario.getCidade().getNome(),
+                funcionario.getCidade().getEstado().getNome(),
+                funcionario.getSalario(), funcionario.getTipo()});
     }//GEN-LAST:event_btAddActionPerformed
 
     private void tfSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSalarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfSalarioActionPerformed
 
-    private void btAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdd1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btAdd1ActionPerformed
+    private void btCalcBonusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalcBonusActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tbProdutoGerente.getModel();
+        Object data = model.getDataVector().elementAt(tbProdutoGerente.getSelectedRow());
+        String[] dados = data.toString().split(",");
+        String nome = dados[1];
+        String matricula = dados[0];
+        String email = dados[2];
+        String cidade = dados[3];
+        String estado = dados[4];
+        String salario = dados[5];
+        double sal = Double.parseDouble(salario);
+        String funcao = dados[6];
+        TipoFuncionario tipo = TipoFuncionario.valueOf(funcao);
+        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
+        Funcionario funcionario = new Funcionario(matricula, nome, email, tipo, city, sal);
+        if(funcionario.getTipo() == TipoFuncionario.Gerente){
+            GerenteService service = new GerenteService(funcionario);
+            double bonus = service.calculoBonus();
+            JOptionPane.showMessageDialog(null, "Esse funcionario ganhara  "
+                    + bonus+ " reais de bonus");
+        }
+        else if(funcionario.getTipo() ==TipoFuncionario.Vendedor){
+            VendedorService service = new VendedorService(funcionario);
+            double bonus = service.calculoBonus();
+            JOptionPane.showMessageDialog(null, "Esse funcionario ganhara  "
+                    + bonus+ " reais de bonus");
+        }
+    }//GEN-LAST:event_btCalcBonusActionPerformed
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        telaOpcoesGerente tela = new telaOpcoesGerente();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btVoltarActionPerformed
+
+    private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btRemoverActionPerformed
+        FuncionarioController controller = new FuncionarioController();
+        DefaultTableModel model = (DefaultTableModel) tbProdutoGerente.getModel();
+        Object data = model.getDataVector().elementAt(tbProdutoGerente.getSelectedRow());
+        String[] dados = data.toString().split(",");
+        String matricula = dados[0];
+        String nome = dados[1];
+        String email = dados[2];
+        String cidade = dados[3];
+        String estado = dados[4];
+        String salario = dados[5];
+        String funcao = dados[6];
+        double sal = Double.parseDouble(salario);
+        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
+        TipoFuncionario tipo = TipoFuncionario.valueOf(funcao);
+        Funcionario funcionario = new Funcionario(matricula, nome, email, tipo, city, sal);
+        controller.delete(funcionario);
+        model.removeRow(tbProdutoGerente.getSelectedRow());
+    }//GEN-LAST:event_btRemoverActionPerformed
+
+    private void btEditarActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btEditarActionPerformed
+        FuncionarioController controller = new FuncionarioController();
+        DefaultTableModel model = (DefaultTableModel) tbProdutoGerente.getModel();
+        Object data = model.getDataVector().elementAt(tbProdutoGerente.getSelectedRow());
+        String[] dados = data.toString().split(",");
+        String matricula = dados[0];
+        String nome = dados[1];
+        String email = dados[2];
+        String cidade = dados[3];
+        String estado = dados[4];
+        String salario = dados[5];
+        String funcao = dados[6];
+        double sal = Double.parseDouble(salario);
+        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
+        TipoFuncionario tipo = TipoFuncionario.valueOf(funcao);
+        Funcionario funcionario = new Funcionario(matricula, nome, email, tipo, city, sal);
+        controller.update(funcionario);
+    }//GEN-LAST:event_btEditarActionPerformed
+
+    private void btRemoverTodosActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btRemoverTodosActionPerformed
+        FuncionarioController controller = new FuncionarioController();
+        controller.deleteAll();
+        DefaultTableModel model = (DefaultTableModel) tbProdutoGerente.getModel();
+        for(int i =0; i<model.getRowCount(); i++){
+            model.removeRow(i);
+        }
+    }//GEN-LAST:event_btRemoverTodosActionPerformed
+
+    private void verificaCampoNome(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Nome vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Nome Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoMatricula(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo CPF ou CNPJ vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo CPF ou CNPJ Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoEmail(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Email vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Email Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoCidade(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Cidade vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Cidade Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoSalario(String var){
+        try{
+            Double.parseDouble(var);
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, "Campo salario preenchido de forma invalida!");
+
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -287,11 +471,11 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdd;
-    private javax.swing.JButton btAdd1;
+    private javax.swing.JButton btCalcBonus;
+    private javax.swing.JButton btEditar;
     private javax.swing.JButton btRemover;
-    private javax.swing.JButton btRemover1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton btRemoverTodos;
+    private javax.swing.JButton btVoltar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbCodigo;
@@ -301,11 +485,13 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
     private javax.swing.JLabel lbQuantidade;
     private javax.swing.JLabel lbSalario;
     private javax.swing.JLabel lbValor;
+    private javax.swing.JComboBox<String> optEstado;
+    private javax.swing.JComboBox<String> optFuncao;
     private javax.swing.JTable tbProdutoGerente;
-    private javax.swing.JTextField tfCodigo;
-    private javax.swing.JTextField tfProduto;
-    private javax.swing.JTextField tfQuantidade;
+    private javax.swing.JTextField tfCidade;
+    private javax.swing.JTextField tfEmail;
+    private javax.swing.JTextField tfMatricula;
+    private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfSalario;
-    private javax.swing.JTextField tfValor;
     // End of variables declaration//GEN-END:variables
 }

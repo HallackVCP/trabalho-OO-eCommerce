@@ -33,6 +33,7 @@ public class telaOpcoesGerente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btProdutos = new javax.swing.JButton();
         btCidades = new javax.swing.JButton();
+        btSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +71,13 @@ public class telaOpcoesGerente extends javax.swing.JFrame {
             }
         });
 
+        btSair.setText("Sair");
+        btSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSairActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,12 +93,17 @@ public class telaOpcoesGerente extends javax.swing.JFrame {
                     .addComponent(btProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(49, 49, 49))
             .addGroup(layout.createSequentialGroup()
-                .addGap(142, 142, 142)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(lbCadastro))
+                        .addGap(142, 142, 142)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lbCadastro)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(227, 227, 227)
+                        .addComponent(btSair, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -110,7 +123,9 @@ public class telaOpcoesGerente extends javax.swing.JFrame {
                         .addComponent(btProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btCidades, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(btSair)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
         pack();
@@ -139,6 +154,12 @@ public class telaOpcoesGerente extends javax.swing.JFrame {
         telaGerCidade.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btCidadesActionPerformed
+
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+        telaInicial tela = new telaInicial();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -187,6 +208,7 @@ public class telaOpcoesGerente extends javax.swing.JFrame {
     private javax.swing.JButton btCliente;
     private javax.swing.JButton btFuncionario;
     private javax.swing.JButton btProdutos;
+    private javax.swing.JButton btSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbCadastro;
     // End of variables declaration//GEN-END:variables

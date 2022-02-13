@@ -4,7 +4,15 @@
  */
 package br.com.ecommerce.projeto.view;
 
-import javax.swing.ButtonGroup;
+import br.com.ecommerce.projeto.controller.ClienteController;
+import br.com.ecommerce.projeto.model.domain.Cidade;
+import br.com.ecommerce.projeto.model.domain.Cliente;
+import br.com.ecommerce.projeto.model.domain.enums.Estado;
+import br.com.ecommerce.projeto.model.domain.enums.TipoCliente;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.io.IOException;
 
 /**
  *
@@ -15,6 +23,8 @@ public class telaClienteGerente extends javax.swing.JFrame {
     /**
      * Creates new form telaProdutoGerente
      */
+
+    TipoCliente tipo;
     public telaClienteGerente() {
         initComponents();
         setLocationRelativeTo(this);
@@ -33,24 +43,24 @@ public class telaClienteGerente extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btRemover = new javax.swing.JButton();
+        btEditar = new javax.swing.JButton();
         btAdd = new javax.swing.JButton();
-        btRemover1 = new javax.swing.JButton();
+        btRemover = new javax.swing.JButton();
         lbProduto = new javax.swing.JLabel();
         tfCPF = new javax.swing.JTextField();
-        tfCodigo = new javax.swing.JTextField();
+        tfNome = new javax.swing.JTextField();
         lbCodigo = new javax.swing.JLabel();
         lbQuantidade = new javax.swing.JLabel();
-        tfQuantidade = new javax.swing.JTextField();
+        tfEmail = new javax.swing.JTextField();
         lbValor = new javax.swing.JLabel();
-        tfValor = new javax.swing.JTextField();
+        tfCidade = new javax.swing.JTextField();
         lbEstado = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbProdutoGerente = new javax.swing.JTable();
-        btAdd1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        tbClienteGerente = new javax.swing.JTable();
+        optEstado = new javax.swing.JComboBox<>();
         rbPFisica = new javax.swing.JRadioButton();
         rbPJuridica = new javax.swing.JRadioButton();
+        btRemoverTodos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(790, 660));
@@ -61,46 +71,51 @@ public class telaClienteGerente extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(790, 660));
         jPanel1.setPreferredSize(new java.awt.Dimension(790, 660));
 
-        btRemover.setText("Editar");
+        btEditar.setText("Editar");
+        btEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    btEditarActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         btAdd.setText("Adicionar");
         btAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAddActionPerformed(evt);
+                try {
+                    btAddActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
-        btRemover1.setText("Remover");
+        btRemover.setText("Remover");
+        btRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    btRemoverActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-        lbProduto.setForeground(new java.awt.Color(0, 0, 0));
         lbProduto.setText("CPF/CNPJ");
 
-        tfCPF.setBackground(new java.awt.Color(255, 255, 255));
-        tfCPF.setForeground(new java.awt.Color(0, 0, 0));
-
-        tfCodigo.setBackground(new java.awt.Color(255, 255, 255));
-        tfCodigo.setForeground(new java.awt.Color(0, 0, 0));
-
-        lbCodigo.setForeground(new java.awt.Color(0, 0, 0));
         lbCodigo.setText("Nome");
 
-        lbQuantidade.setForeground(new java.awt.Color(0, 0, 0));
         lbQuantidade.setText("E-mail");
 
-        tfQuantidade.setBackground(new java.awt.Color(255, 255, 255));
-        tfQuantidade.setForeground(new java.awt.Color(0, 0, 0));
-
-        lbValor.setForeground(new java.awt.Color(0, 0, 0));
         lbValor.setText("Cidade");
 
-        tfValor.setBackground(new java.awt.Color(255, 255, 255));
-        tfValor.setForeground(new java.awt.Color(0, 0, 0));
-
-        lbEstado.setForeground(new java.awt.Color(0, 0, 0));
         lbEstado.setText("Estado");
 
-        tbProdutoGerente.setBackground(new java.awt.Color(204, 204, 204));
-        tbProdutoGerente.setModel(new javax.swing.table.DefaultTableModel(
+        tbClienteGerente.setBackground(new java.awt.Color(204, 204, 204));
+        tbClienteGerente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -126,25 +141,39 @@ public class telaClienteGerente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbProdutoGerente.setSelectionBackground(new java.awt.Color(51, 51, 255));
-        jScrollPane1.setViewportView(tbProdutoGerente);
-        if (tbProdutoGerente.getColumnModel().getColumnCount() > 0) {
-            tbProdutoGerente.getColumnModel().getColumn(4).setResizable(false);
-            tbProdutoGerente.getColumnModel().getColumn(4).setPreferredWidth(50);
+        tbClienteGerente.setSelectionBackground(new java.awt.Color(51, 51, 255));
+        jScrollPane1.setViewportView(tbClienteGerente);
+        if (tbClienteGerente.getColumnModel().getColumnCount() > 0) {
+            tbClienteGerente.getColumnModel().getColumn(4).setResizable(false);
+            tbClienteGerente.getColumnModel().getColumn(4).setPreferredWidth(50);
         }
 
-        btAdd1.setText("Calcular B�nus");
-        btAdd1.addActionListener(new java.awt.event.ActionListener() {
+        optEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
+
+        rbPFisica.setText("Pessoa Fisica");
+        rbPFisica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAdd1ActionPerformed(evt);
+                rbPFisicaActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
-
-        rbPFisica.setText("Pessoa Fisica");
-
         rbPJuridica.setText("Pessoa Juridica");
+        rbPJuridica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbPJuridicaActionPerformed(evt);
+            }
+        });
+
+        btRemoverTodos.setText("Remover todos");
+        btRemoverTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    btRemoverTodosActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -153,20 +182,20 @@ public class telaClienteGerente extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btRemoverTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btAdd1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                         .addComponent(tfCPF)
                         .addComponent(lbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tfCodigo)
+                        .addComponent(tfNome)
                         .addComponent(lbQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tfQuantidade)
+                        .addComponent(tfEmail)
                         .addComponent(lbValor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tfValor)
+                        .addComponent(tfCidade)
                         .addComponent(lbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btRemover1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                         .addComponent(btRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(optEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbProduto))
                     .addComponent(rbPFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rbPJuridica))
@@ -187,32 +216,32 @@ public class telaClienteGerente extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(lbCodigo)
                         .addGap(6, 6, 6)
-                        .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(lbQuantidade)
                         .addGap(6, 6, 6)
-                        .addComponent(tfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(lbValor)
                         .addGap(6, 6, 6)
-                        .addComponent(tfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(6, 6, 6)
                         .addComponent(lbEstado)
                         .addGap(8, 8, 8)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(optEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(rbPFisica)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rbPJuridica)
-                        .addGap(89, 89, 89)
-                        .addComponent(btAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(120, 120, 120)
+                        .addComponent(btRemoverTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(btRemover1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(btRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -221,17 +250,122 @@ public class telaClienteGerente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
-        // TODO add your handling code here:
+    private void btAddActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btAddActionPerformed
+        verificaCampoNome(tfNome.getText());
+        verificaCampoCpfOuCNPJ(tfCPF.getText());
+        verificaCampoEmail(tfEmail.getText());
+        verificaCampoCidade(tfCidade.getText());
+        String nome = tfNome.getText();
+        String cpfOuCnpj = tfCPF.getText();
+        String email = tfEmail.getText();
+        String cidade = tfCidade.getText();
+        String estado = optEstado.getSelectedItem().toString();
+        TipoCliente type = this.tipo;
+        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
+        Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, city);
+        ClienteController controller = new ClienteController();
+        controller.save(cliente);
+        DefaultTableModel model = (DefaultTableModel) tbClienteGerente.getModel();
+        model.addRow(new Object[]{cliente.getCpfOuCnpj(), cliente.getNome(),
+                cliente.getEmail(), cliente.getCidade().getNome(),
+                cliente.getCidade().getEstado().getNome(), cliente.getTipo()});
+
     }//GEN-LAST:event_btAddActionPerformed
 
-    private void btAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdd1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btAdd1ActionPerformed
+    private void rbPFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPFisicaActionPerformed
+        if(rbPJuridica.isSelected()){
+            this.tipo = TipoCliente.PESSOAJURIDICA;
+        }
+    }//GEN-LAST:event_rbPFisicaActionPerformed
+
+    private void rbPJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPJuridicaActionPerformed
+        if(rbPFisica.isSelected()){
+            this.tipo = TipoCliente.PESSOAFISICA;
+        }
+    }//GEN-LAST:event_rbPJuridicaActionPerformed
+
+    private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btRemoverActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tbClienteGerente.getModel();
+        Object data = model.getDataVector().elementAt(tbClienteGerente.getSelectedRow());
+        String[] dados = data.toString().split(",");
+        String cpfOuCnpj = dados[0];
+        String nome = dados[1];
+        String email = dados[2];
+        String cidade = dados[3];
+        String estado = dados[4];
+        String tipoCli = dados[5];
+        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
+        TipoCliente type = TipoCliente.valueOf(tipoCli);
+        Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, city);
+        ClienteController controller = new ClienteController();
+        controller.delete(cliente);
+        model.removeRow(tbClienteGerente.getSelectedRow());
+    }//GEN-LAST:event_btRemoverActionPerformed
+
+    private void btEditarActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btEditarActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tbClienteGerente.getModel();
+        Object data = model.getDataVector().elementAt(tbClienteGerente.getSelectedRow());
+        String[] dados = data.toString().split(",");
+        String cpfOuCnpj = dados[0];
+        String nome = dados[1];
+        String email = dados[2];
+        String cidade = dados[3];
+        String estado = dados[4];
+        String tipoCli = dados[5];
+        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
+        TipoCliente type = TipoCliente.valueOf(tipoCli);
+        Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, city);
+        ClienteController controller = new ClienteController();
+        controller.update(cliente);
+    }//GEN-LAST:event_btEditarActionPerformed
+
+    private void btRemoverTodosActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btRemoverTodosActionPerformed
+        ClienteController controller = new ClienteController();
+        controller.deleteAll();
+        DefaultTableModel model = (DefaultTableModel) tbClienteGerente.getModel();
+        for(int i =0; i<model.getRowCount(); i++){
+            model.removeRow(i);
+        }
+    }//GEN-LAST:event_btRemoverTodosActionPerformed
+
+    private void verificaCampoNome(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Nome vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Nome Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoCpfOuCNPJ(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo CPF ou CNPJ vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo CPF ou CNPJ Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoEmail(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Email vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Email Preenchido com sucesso!");
+        }
+    }
+    private void verificaCampoCidade(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Cidade vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Cidade Preenchido com sucesso!");
+        }
+    }
 
     /**
      * @param args the command line arguments
      */
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -269,10 +403,9 @@ public class telaClienteGerente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdd;
-    private javax.swing.JButton btAdd1;
+    private javax.swing.JButton btEditar;
     private javax.swing.JButton btRemover;
-    private javax.swing.JButton btRemover1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btRemoverTodos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbCodigo;
@@ -280,12 +413,13 @@ public class telaClienteGerente extends javax.swing.JFrame {
     private javax.swing.JLabel lbProduto;
     private javax.swing.JLabel lbQuantidade;
     private javax.swing.JLabel lbValor;
+    private javax.swing.JComboBox<String> optEstado;
     private javax.swing.JRadioButton rbPFisica;
     private javax.swing.JRadioButton rbPJuridica;
-    private javax.swing.JTable tbProdutoGerente;
+    private javax.swing.JTable tbClienteGerente;
     private javax.swing.JTextField tfCPF;
-    private javax.swing.JTextField tfCodigo;
-    private javax.swing.JTextField tfQuantidade;
-    private javax.swing.JTextField tfValor;
+    private javax.swing.JTextField tfCidade;
+    private javax.swing.JTextField tfEmail;
+    private javax.swing.JTextField tfNome;
     // End of variables declaration//GEN-END:variables
 }

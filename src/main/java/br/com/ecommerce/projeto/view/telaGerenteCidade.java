@@ -4,6 +4,14 @@
  */
 package br.com.ecommerce.projeto.view;
 
+import br.com.ecommerce.projeto.controller.CidadeController;
+import br.com.ecommerce.projeto.model.domain.Cidade;
+import br.com.ecommerce.projeto.model.domain.enums.Estado;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.io.IOException;
+
 /**
  *
  * @author vinib
@@ -28,15 +36,17 @@ public class telaGerenteCidade extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btRemover = new javax.swing.JButton();
+        btEditar = new javax.swing.JButton();
         btAdd = new javax.swing.JButton();
-        btRemover1 = new javax.swing.JButton();
+        btRemover = new javax.swing.JButton();
         lbCidade = new javax.swing.JLabel();
         tfCidade = new javax.swing.JTextField();
         lbCodigo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbProdutoGerente = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        tbCidadeGerente = new javax.swing.JTable();
+        optEstado = new javax.swing.JComboBox<>();
+        btRemoverTodos = new javax.swing.JButton();
+        btVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(790, 660));
@@ -47,28 +57,45 @@ public class telaGerenteCidade extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(790, 660));
         jPanel1.setPreferredSize(new java.awt.Dimension(790, 660));
 
-        btRemover.setText("Editar");
+        btEditar.setText("Editar");
+        btEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    btEditarActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         btAdd.setText("Adicionar");
         btAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAddActionPerformed(evt);
+                try {
+                    btAddActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
-        btRemover1.setText("Remover");
+        btRemover.setText("Remover");
+        btRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    btRemoverActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-        lbCidade.setForeground(new java.awt.Color(0, 0, 0));
         lbCidade.setText("Cidade");
 
-        tfCidade.setBackground(new java.awt.Color(255, 255, 255));
-        tfCidade.setForeground(new java.awt.Color(0, 0, 0));
-
-        lbCodigo.setForeground(new java.awt.Color(0, 0, 0));
         lbCodigo.setText("Estado");
 
-        tbProdutoGerente.setBackground(new java.awt.Color(204, 204, 204));
-        tbProdutoGerente.setModel(new javax.swing.table.DefaultTableModel(
+        tbCidadeGerente.setBackground(new java.awt.Color(204, 204, 204));
+        tbCidadeGerente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -94,10 +121,28 @@ public class telaGerenteCidade extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbProdutoGerente.setSelectionBackground(new java.awt.Color(51, 51, 255));
-        jScrollPane1.setViewportView(tbProdutoGerente);
+        tbCidadeGerente.setSelectionBackground(new java.awt.Color(51, 51, 255));
+        jScrollPane1.setViewportView(tbCidadeGerente);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
+        optEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
+
+        btRemoverTodos.setText("Remover todos");
+        btRemoverTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    btRemoverTodosActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        btVoltar.setText("Voltar");
+        btVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -105,14 +150,18 @@ public class telaGerenteCidade extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfCidade)
-                    .addComponent(lbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                    .addComponent(btRemover1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfCidade)
+                        .addComponent(lbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(optEstado, 0, 130, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btRemoverTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -130,14 +179,19 @@ public class telaGerenteCidade extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(lbCodigo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(371, 371, 371)
+                        .addComponent(optEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(267, 267, 267)
+                        .addComponent(btRemoverTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(btRemover1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(btRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btVoltar)
+                        .addGap(24, 24, 24)))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -146,9 +200,62 @@ public class telaGerenteCidade extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
-        // TODO add your handling code here:
+    private void btAddActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btAddActionPerformed
+        String cidade = tfCidade.getText();
+        String estado = optEstado.getSelectedItem().toString();
+        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
+        CidadeController controller = new CidadeController();
+        controller.save(city);
+        DefaultTableModel model = (DefaultTableModel) tbCidadeGerente.getModel();
+        model.addRow(new Object[]{city.getNome(), city.getEstado().getNome()});
+
+
     }//GEN-LAST:event_btAddActionPerformed
+    private void verificaCampoCidade(String var){
+        if(var.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo Cidade vazio!");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Campo Cidade Preenchido com sucesso!");
+        }
+    }
+    private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btRemoverActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tbCidadeGerente.getModel();
+        Object data = model.getDataVector().elementAt(tbCidadeGerente.getSelectedRow());
+        String[] dados = data.toString().split(",");
+        String cidade = dados[0];
+        String estado = dados[1];
+        CidadeController controller = new CidadeController();
+        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
+        controller.delete(city);
+        model.removeRow(tbCidadeGerente.getSelectedRow());
+    }//GEN-LAST:event_btRemoverActionPerformed
+
+    private void btEditarActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btEditarActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tbCidadeGerente.getModel();
+        Object data = model.getDataVector().elementAt(tbCidadeGerente.getSelectedRow());
+        String[] dados = data.toString().split(",");
+        String cidade = dados[0];
+        String estado = dados[1];
+        CidadeController controller = new CidadeController();
+        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
+        controller.update(city);
+    }//GEN-LAST:event_btEditarActionPerformed
+
+    private void btRemoverTodosActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btRemoverTodosActionPerformed
+        CidadeController controller = new CidadeController();
+        controller.deleteAll();
+        DefaultTableModel model = (DefaultTableModel) tbCidadeGerente.getModel();
+        for(int i =0; i<model.getRowCount(); i++){
+            model.removeRow(i);
+        }
+    }//GEN-LAST:event_btRemoverTodosActionPerformed
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        telaOpcoesGerente tela = new telaOpcoesGerente();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,14 +297,16 @@ public class telaGerenteCidade extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdd;
+    private javax.swing.JButton btEditar;
     private javax.swing.JButton btRemover;
-    private javax.swing.JButton btRemover1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btRemoverTodos;
+    private javax.swing.JButton btVoltar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbCidade;
     private javax.swing.JLabel lbCodigo;
-    private javax.swing.JTable tbProdutoGerente;
+    private javax.swing.JComboBox<String> optEstado;
+    private javax.swing.JTable tbCidadeGerente;
     private javax.swing.JTextField tfCidade;
     // End of variables declaration//GEN-END:variables
 }

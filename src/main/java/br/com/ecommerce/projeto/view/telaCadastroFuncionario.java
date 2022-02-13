@@ -4,13 +4,10 @@
  */
 package br.com.ecommerce.projeto.view;
 
-import br.com.ecommerce.projeto.controller.ClienteController;
 import br.com.ecommerce.projeto.controller.FuncionarioController;
 import br.com.ecommerce.projeto.model.domain.Cidade;
-import br.com.ecommerce.projeto.model.domain.Cliente;
 import br.com.ecommerce.projeto.model.domain.Funcionario;
 import br.com.ecommerce.projeto.model.domain.enums.Estado;
-import br.com.ecommerce.projeto.model.domain.enums.TipoCliente;
 import br.com.ecommerce.projeto.model.domain.enums.TipoFuncionario;
 
 import javax.swing.*;
@@ -214,11 +211,15 @@ public class telaCadastroFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void rbGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbGerenteActionPerformed
-        // TODO add your handling code here:
+        if(rbGerente.isSelected()){
+            this.tipo = TipoFuncionario.Gerente;
+        }
     }//GEN-LAST:event_rbGerenteActionPerformed
 
     private void rbVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbVendedorActionPerformed
-        // TODO add your handling code here:
+        if(rbVendedor.isSelected()){
+            this.tipo = TipoFuncionario.Vendedor;
+        }
     }//GEN-LAST:event_rbVendedorActionPerformed
 
     private void tfCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCidadeActionPerformed
@@ -239,6 +240,7 @@ public class telaCadastroFuncionario extends javax.swing.JFrame {
         String email = tfEmail.getText();
         String cidade = tfCidade.getText();
         Estado estado = Estado.valueOf(optEstado.getSelectedItem().toString());
+        verificaSalario(tfSalario.getText());
         double salario = Double.parseDouble(tfSalario.getText());
         TipoFuncionario type = this.tipo;
         verificaCampoNome(nome);
@@ -249,7 +251,7 @@ public class telaCadastroFuncionario extends javax.swing.JFrame {
         Funcionario funcionario = new Funcionario(matricula, nome, email, type, city, salario);
         FuncionarioController controller = new FuncionarioController();
         controller.save(funcionario);
-        if(funcionario.getTipo() == TipoFuncionario.Administrador){
+        if(funcionario.getTipo() == TipoFuncionario.Gerente){
             telaOpcoesGerente tela = new telaOpcoesGerente();
             tela.setVisible(true);
         }

@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class Funcionario extends Pessoa{
     private String matricula;
-    private Integer tipo;
+    private int tipo;
     private double salario;
     private TipoFuncionario type;
 

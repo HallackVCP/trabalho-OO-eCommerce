@@ -113,7 +113,7 @@ public class telaLoginFuncionario extends javax.swing.JFrame {
         verificaCampoMatricula(matricula);
         try{
             Funcionario funcionario = login(matricula);
-            if(tipo == TipoFuncionario.Administrador){
+            if(tipo == TipoFuncionario.Gerente){
                 telaOpcoesGerente tela = new telaOpcoesGerente();
                 tela.setVisible(true);
                 this.setVisible(false);

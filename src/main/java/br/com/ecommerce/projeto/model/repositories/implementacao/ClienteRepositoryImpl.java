@@ -86,7 +86,7 @@ public class ClienteRepositoryImpl implements Repository<Cliente> {
     @Override
     public void save(Cliente obj) throws IOException {
         bw.write(obj.getCpfOuCnpj()+", "+obj.getNome()+","
-                +obj.getEmail()+","+","+obj.getTipo()+
+                +obj.getEmail()+","+obj.getTipo()+","+
                 obj.getCidade().getNome()+","+obj.getCidade().getEstado().getNome());
         bw.flush();
         bw.newLine();

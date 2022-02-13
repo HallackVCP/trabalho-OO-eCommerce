@@ -34,7 +34,7 @@ public class telaInicial extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lbOpcoes.setFont(new java.awt.Font("sansserif", 0, 48)); // NOI18N
-        lbOpcoes.setText("INICIO");
+        lbOpcoes.setText("     INICIO ");
 
         btCadastro.setText("Cadastro");
         btCadastro.addActionListener(new java.awt.event.ActionListener() {

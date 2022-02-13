@@ -35,6 +35,7 @@ public class telaOpcoesCliente extends javax.swing.JFrame {
         btCliente = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btProdutos = new javax.swing.JButton();
+        btSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,6 +59,13 @@ public class telaOpcoesCliente extends javax.swing.JFrame {
             }
         });
 
+        btSair.setText("Sair");
+        btSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSairActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,7 +82,10 @@ public class telaOpcoesCliente extends javax.swing.JFrame {
                         .addGap(166, 166, 166)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(213, 213, 213)
+                        .addComponent(btSair, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -88,7 +99,9 @@ public class telaOpcoesCliente extends javax.swing.JFrame {
                 .addComponent(btCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btSair)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
@@ -105,6 +118,12 @@ public class telaOpcoesCliente extends javax.swing.JFrame {
         telaCliProduto.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btProdutosActionPerformed
+
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+        telaInicial tela = new telaInicial();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,6 +178,7 @@ public class telaOpcoesCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCliente;
     private javax.swing.JButton btProdutos;
+    private javax.swing.JButton btSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbCadastro;
     // End of variables declaration//GEN-END:variables

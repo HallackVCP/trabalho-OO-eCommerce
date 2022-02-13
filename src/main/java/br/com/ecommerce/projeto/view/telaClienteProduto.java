@@ -5,6 +5,14 @@
 package br.com.ecommerce.projeto.view;
 
 import br.com.ecommerce.projeto.model.domain.Cliente;
+import br.com.ecommerce.projeto.model.domain.Produto;
+import br.com.ecommerce.projeto.model.domain.enums.TipoCliente;
+import br.com.ecommerce.projeto.model.services.ClienteCNPJService;
+import br.com.ecommerce.projeto.model.services.ClienteCPFService;
+import br.com.ecommerce.projeto.model.services.ClienteService;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -34,7 +42,8 @@ public class telaClienteProduto extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProdutoGerente = new javax.swing.JTable();
-        btAdd1 = new javax.swing.JButton();
+        btCalCDesconto = new javax.swing.JButton();
+        btVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(790, 660));
@@ -75,10 +84,17 @@ public class telaClienteProduto extends javax.swing.JFrame {
         tbProdutoGerente.setSelectionBackground(new java.awt.Color(51, 51, 255));
         jScrollPane1.setViewportView(tbProdutoGerente);
 
-        btAdd1.setText("Calcular Desconto");
-        btAdd1.addActionListener(new java.awt.event.ActionListener() {
+        btCalCDesconto.setText("Calcular Desconto");
+        btCalCDesconto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAdd1ActionPerformed(evt);
+                btCalCDescontoActionPerformed(evt);
+            }
+        });
+
+        btVoltar.setText("Voltar");
+        btVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVoltarActionPerformed(evt);
             }
         });
 
@@ -88,7 +104,9 @@ public class telaClienteProduto extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(btAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btCalCDesconto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btVoltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -102,7 +120,9 @@ public class telaClienteProduto extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(282, 282, 282)
-                        .addComponent(btAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btCalCDesconto, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(43, Short.MAX_VALUE))
         );
 
@@ -112,9 +132,35 @@ public class telaClienteProduto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btAdd1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdd1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btAdd1ActionPerformed
+    private void btCalCDescontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCalCDescontoActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tbProdutoGerente.getModel();
+        Object data = model.getDataVector().elementAt(tbProdutoGerente.getSelectedRow());
+        String[] dados = data.toString().split(",");
+        String prod = dados[0];
+        String cod = dados[1];
+        double valor = Double.parseDouble(dados[3]);
+        int qtd = Integer.parseInt(dados[2]);
+        Produto produto = new Produto(prod, cod, valor, qtd);
+        if(this.cliente.getTipo() == TipoCliente.PESSOAFISICA){
+            ClienteCPFService service = new ClienteCPFService(this.cliente);
+            double desconto = service.calculoDesconto(produto.getPreco());
+            JOptionPane.showMessageDialog(null, "Seu desconto para esse produto é de: "+ desconto);
+        }
+        else if(this.cliente.getTipo() == TipoCliente.PESSOAJURIDICA){
+            ClienteCNPJService service = new ClienteCNPJService(this.cliente);
+            double desconto = service.calculoDesconto(produto.getPreco());
+            JOptionPane.showMessageDialog(null, "Seu desconto para esse produto é de: "+ desconto);
+        }
+    }//GEN-LAST:event_btCalCDescontoActionPerformed
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        telaOpcoesCliente tela = new telaOpcoesCliente(this.cliente);
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btVoltarActionPerformed
+
+
+
 
     /**
      * @param args the command line arguments
@@ -155,7 +201,8 @@ public class telaClienteProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btAdd1;
+    private javax.swing.JButton btCalCDesconto;
+    private javax.swing.JButton btVoltar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbProdutoGerente;
