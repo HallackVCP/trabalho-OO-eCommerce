@@ -61,6 +61,7 @@ public class telaClienteGerente extends javax.swing.JFrame {
         rbPFisica = new javax.swing.JRadioButton();
         rbPJuridica = new javax.swing.JRadioButton();
         btRemoverTodos = new javax.swing.JButton();
+        btVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(790, 660));
@@ -198,7 +199,8 @@ public class telaClienteGerente extends javax.swing.JFrame {
                         .addComponent(optEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lbProduto))
                     .addComponent(rbPFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbPJuridica))
+                    .addComponent(rbPJuridica)
+                    .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -241,7 +243,9 @@ public class telaClienteGerente extends javax.swing.JFrame {
                         .addComponent(btRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btVoltar)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -328,6 +332,12 @@ public class telaClienteGerente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btRemoverTodosActionPerformed
 
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVoltarActionPerformed
+        telaOpcoesGerente tela = new telaOpcoesGerente();
+        tela.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btVoltarActionPerformed
+
     private void verificaCampoNome(String var){
         if(var.isEmpty()){
             JOptionPane.showMessageDialog(null, "Campo Nome vazio!");
@@ -406,6 +416,7 @@ public class telaClienteGerente extends javax.swing.JFrame {
     private javax.swing.JButton btEditar;
     private javax.swing.JButton btRemover;
     private javax.swing.JButton btRemoverTodos;
+    private javax.swing.JButton btVoltar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbCodigo;
