@@ -15,6 +15,7 @@ import br.com.ecommerce.projeto.model.services.VendedorService;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -25,9 +26,10 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
     /**
      * Creates new form telaProdutoGerente
      */
-    public telaFuncionarioGerente() {
+    public telaFuncionarioGerente() throws IOException {
         initComponents();
         setLocationRelativeTo(this);
+        //addAll();
     }
 
     /**
@@ -293,7 +295,8 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         verificaCampoNome(nome);
         verificaCampoSalario(salario);
         Cidade city = new Cidade(cidade, Estado.valueOf(estado));
-        TipoFuncionario tipo = TipoFuncionario.valueOf(optFuncao.toString());
+        System.out.println(optFuncao.getSelectedItem().toString());
+        TipoFuncionario tipo = TipoFuncionario.valueOf(optFuncao.getSelectedItem().toString());
         double sal = Double.parseDouble(salario);
         Funcionario funcionario = new Funcionario(matricula, nome, email, tipo, city, sal);
         FuncionarioController controller = new FuncionarioController();
@@ -432,6 +435,18 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
 
         }
     }
+    private void addAll() throws IOException {
+        DefaultTableModel model = (DefaultTableModel) tbProdutoGerente.getModel();
+        FuncionarioController controller = new FuncionarioController();
+        List<Funcionario> funcionarios = controller.findAll();
+        for (Funcionario funcionario:
+             funcionarios) {
+            model.addRow(new Object[]{funcionario.getMatricula(), funcionario.getNome(),
+                    funcionario.getEmail(), funcionario.getCidade().getNome(),
+                    funcionario.getCidade().getEstado().getNome(),
+                    funcionario.getSalario(), funcionario.getTipo()});
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -464,7 +479,11 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaFuncionarioGerente().setVisible(true);
+                try {
+                    new telaFuncionarioGerente().setVisible(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

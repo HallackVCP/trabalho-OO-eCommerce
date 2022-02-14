@@ -10,6 +10,7 @@ import br.com.ecommerce.projeto.model.domain.Produto;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -20,9 +21,10 @@ public class telaGerenteProduto extends javax.swing.JFrame {
     /**
      * Creates new form telaProdutoGerente
      */
-    public telaGerenteProduto() {
+    public telaGerenteProduto() throws IOException {
         initComponents();
         setLocationRelativeTo(this);
+        addAll();
     }
 
     /**
@@ -313,6 +315,17 @@ public class telaGerenteProduto extends javax.swing.JFrame {
         }
     }
 
+    private void addAll() throws IOException {
+        ProdutoController controller = new ProdutoController();
+        List<Produto> produtos = controller.findAll();
+        DefaultTableModel model = (DefaultTableModel) tbGerenteProduto.getModel();
+        for (Produto produto:
+             produtos) {
+            model.addRow(new Object[]{produto.getNome(), produto.getCodigoProduto(),
+                    produto.getQtd(), produto.getPreco()});
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -346,7 +359,11 @@ public class telaGerenteProduto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaGerenteProduto().setVisible(true);
+                try {
+                    new telaGerenteProduto().setVisible(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

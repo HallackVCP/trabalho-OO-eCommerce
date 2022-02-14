@@ -4,7 +4,13 @@
  */
 package br.com.ecommerce.projeto.view;
 
+import br.com.ecommerce.projeto.controller.CidadeController;
+import br.com.ecommerce.projeto.model.domain.Cidade;
 import br.com.ecommerce.projeto.model.domain.Cliente;
+
+import javax.swing.table.DefaultTableModel;
+import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -17,10 +23,11 @@ public class telaClienteCidade extends javax.swing.JFrame {
      */
 
     static Cliente cliente;
-    public telaClienteCidade(Cliente cliente) {
+    public telaClienteCidade(Cliente cliente) throws IOException {
         initComponents();
         setLocationRelativeTo(this);
         this.cliente = cliente;
+        addAll();
     }
 
     /**
@@ -119,6 +126,16 @@ public class telaClienteCidade extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btVoltarActionPerformed
 
+    private void addAll() throws IOException {
+        CidadeController controller = new CidadeController();
+        List<Cidade> cidades = controller.findAll();
+        DefaultTableModel model = (DefaultTableModel) tbProdutoGerente.getModel();
+        for (Cidade cidade:
+             cidades) {
+            model.addRow(new Object[]{cidade.getNome(), cidade.getEstado().getNome()});
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -156,7 +173,11 @@ public class telaClienteCidade extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaClienteCidade(cliente).setVisible(true);
+                try {
+                    new telaClienteCidade(cliente).setVisible(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

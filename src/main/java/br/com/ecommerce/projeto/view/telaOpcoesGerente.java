@@ -4,6 +4,8 @@
  */
 package br.com.ecommerce.projeto.view;
 
+import java.io.IOException;
+
 /**
  *
  * @author vinib
@@ -43,14 +45,22 @@ public class telaOpcoesGerente extends javax.swing.JFrame {
         btCliente.setText("Clientes");
         btCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btClienteActionPerformed(evt);
+                try {
+                    btClienteActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         btFuncionario.setText("Funcionario");
         btFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btFuncionarioActionPerformed(evt);
+                try {
+                    btFuncionarioActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -60,14 +70,22 @@ public class telaOpcoesGerente extends javax.swing.JFrame {
         btProdutos.setText("Produtos");
         btProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btProdutosActionPerformed(evt);
+                try {
+                    btProdutosActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         btCidades.setText("Cidades de Atuacao");
         btCidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btCidadesActionPerformed(evt);
+                try {
+                    btCidadesActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -131,25 +149,25 @@ public class telaOpcoesGerente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClienteActionPerformed
+    private void btClienteActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btClienteActionPerformed
         telaClienteGerente telaCliGerente = new telaClienteGerente();
         telaCliGerente.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btClienteActionPerformed
 
-    private void btFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFuncionarioActionPerformed
+    private void btFuncionarioActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btFuncionarioActionPerformed
         telaFuncionarioGerente telaFunGerente = new telaFuncionarioGerente();
         telaFunGerente.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btFuncionarioActionPerformed
 
-    private void btProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProdutosActionPerformed
+    private void btProdutosActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btProdutosActionPerformed
         telaGerenteProduto telaGerProduto = new telaGerenteProduto();
         telaGerProduto.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btProdutosActionPerformed
 
-    private void btCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCidadesActionPerformed
+    private void btCidadesActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btCidadesActionPerformed
         telaGerenteCidade telaGerCidade = new telaGerenteCidade();
         telaGerCidade.setVisible(true);
         this.setVisible(false);

@@ -11,6 +11,7 @@ import br.com.ecommerce.projeto.model.domain.enums.Estado;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -21,9 +22,10 @@ public class telaGerenteCidade extends javax.swing.JFrame {
     /**
      * Creates new form telaProdutoGerente
      */
-    public telaGerenteCidade() {
+    public telaGerenteCidade() throws IOException {
         initComponents();
         setLocationRelativeTo(this);
+        addAll();
     }
 
     /**
@@ -256,6 +258,15 @@ public class telaGerenteCidade extends javax.swing.JFrame {
         tela.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btVoltarActionPerformed
+    private void addAll() throws IOException {
+        DefaultTableModel model = (DefaultTableModel) tbCidadeGerente.getModel();
+        CidadeController controller = new CidadeController();
+        List<Cidade> cidades = controller.findAll();
+        for (Cidade cidade:
+             cidades) {
+            model.addRow(new Object[]{cidade.getNome(), cidade.getEstado().getNome()});
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -290,7 +301,11 @@ public class telaGerenteCidade extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaGerenteCidade().setVisible(true);
+                try {
+                    new telaGerenteCidade().setVisible(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

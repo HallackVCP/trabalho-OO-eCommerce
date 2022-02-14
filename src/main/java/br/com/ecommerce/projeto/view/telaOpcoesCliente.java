@@ -6,6 +6,8 @@ package br.com.ecommerce.projeto.view;
 
 import br.com.ecommerce.projeto.model.domain.Cliente;
 
+import java.io.IOException;
+
 /**
  *
  * @author vinib
@@ -45,7 +47,11 @@ public class telaOpcoesCliente extends javax.swing.JFrame {
         btCliente.setText("Cidades de Atuacao");
         btCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btClienteActionPerformed(evt);
+                try {
+                    btClienteActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -55,7 +61,11 @@ public class telaOpcoesCliente extends javax.swing.JFrame {
         btProdutos.setText("Produtos");
         btProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btProdutosActionPerformed(evt);
+                try {
+                    btProdutosActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -107,13 +117,13 @@ public class telaOpcoesCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btClienteActionPerformed
+    private void btClienteActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btClienteActionPerformed
         telaClienteCidade telaCliCidades = new telaClienteCidade(cliente);
         telaCliCidades.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btClienteActionPerformed
 
-    private void btProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProdutosActionPerformed
+    private void btProdutosActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btProdutosActionPerformed
         telaClienteProduto telaCliProduto = new telaClienteProduto(cliente);
         telaCliProduto.setVisible(true);
         this.setVisible(false);

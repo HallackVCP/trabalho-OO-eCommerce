@@ -4,6 +4,7 @@
  */
 package br.com.ecommerce.projeto.view;
 
+import br.com.ecommerce.projeto.controller.ProdutoController;
 import br.com.ecommerce.projeto.model.domain.Cliente;
 import br.com.ecommerce.projeto.model.domain.Produto;
 import br.com.ecommerce.projeto.model.domain.enums.TipoCliente;
@@ -13,6 +14,8 @@ import br.com.ecommerce.projeto.model.services.ClienteService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -24,10 +27,11 @@ public class telaClienteProduto extends javax.swing.JFrame {
      * Creates new form telaProdutoGerente
      */
     static Cliente cliente;
-    public telaClienteProduto(Cliente cliente) {
+    public telaClienteProduto(Cliente cliente) throws IOException {
         initComponents();
         setLocationRelativeTo(this);
         this.cliente = cliente;
+        addAll();
     }
 
     /**
@@ -159,6 +163,17 @@ public class telaClienteProduto extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btVoltarActionPerformed
 
+    private void addAll() throws IOException {
+        ProdutoController controller = new ProdutoController();
+        DefaultTableModel model = (DefaultTableModel) tbProdutoGerente.getModel();
+        List<Produto> produtos = controller.findAll();
+        for (Produto produto:
+                produtos) {
+            model.addRow(new Object[]{produto.getNome(), produto.getCodigoProduto(),
+                    produto.getQtd(), produto.getPreco()});
+        }
+    }
+
 
 
 
@@ -195,7 +210,11 @@ public class telaClienteProduto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaClienteProduto(cliente).setVisible(true);
+                try {
+                    new telaClienteProduto(cliente).setVisible(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
