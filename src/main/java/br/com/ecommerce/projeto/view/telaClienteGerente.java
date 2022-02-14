@@ -13,7 +13,6 @@ import br.com.ecommerce.projeto.model.domain.enums.TipoCliente;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
-import java.util.List;
 
 /**
  *
@@ -26,13 +25,12 @@ public class telaClienteGerente extends javax.swing.JFrame {
      */
 
     TipoCliente tipo;
-    public telaClienteGerente() throws IOException {
+    public telaClienteGerente() {
         initComponents();
         setLocationRelativeTo(this);
         ButtonGroup group = new ButtonGroup();
         group.add(rbPFisica);
         group.add(rbPJuridica);
-        //addAll();
     }
 
     /**
@@ -362,18 +360,6 @@ public class telaClienteGerente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Campo Cidade Preenchido com sucesso!");
         }
     }
-    private void addAll() throws IOException {
-        DefaultTableModel model = (DefaultTableModel) tbClienteGerente.getModel();
-        ClienteController controller = new ClienteController();
-        List<Cliente> clientes = controller.findAll();
-        for (Cliente cliente:
-             clientes) {
-            model.addRow(new Object[]{cliente.getCpfOuCnpj(), cliente.getNome(),
-                    cliente.getEmail(), cliente.getCidade().getNome(),
-                    cliente.getCidade().getEstado().getNome(), cliente.getTipo()});
-        }
-
-    }
 
     /**
      * @param args the command line arguments
@@ -410,11 +396,7 @@ public class telaClienteGerente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new telaClienteGerente().setVisible(true);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                new telaClienteGerente().setVisible(true);
             }
         });
     }
