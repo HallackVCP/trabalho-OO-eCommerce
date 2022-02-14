@@ -64,7 +64,8 @@ public class telaClienteGerente extends javax.swing.JFrame {
         btVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(790, 660));
+        setMinimumSize(new java.awt.Dimension(790, 700));
+        setPreferredSize(new java.awt.Dimension(790, 700));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -75,33 +76,21 @@ public class telaClienteGerente extends javax.swing.JFrame {
         btEditar.setText("Editar");
         btEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    btEditarActionPerformed(evt);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                btEditarActionPerformed(evt);
             }
         });
 
         btAdd.setText("Adicionar");
         btAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    btAddActionPerformed(evt);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                btAddActionPerformed(evt);
             }
         });
 
         btRemover.setText("Remover");
         btRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    btRemoverActionPerformed(evt);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                btRemoverActionPerformed(evt);
             }
         });
 
@@ -168,11 +157,14 @@ public class telaClienteGerente extends javax.swing.JFrame {
         btRemoverTodos.setText("Remover todos");
         btRemoverTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    btRemoverTodosActionPerformed(evt);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                btRemoverTodosActionPerformed(evt);
+            }
+        });
+
+        btVoltar.setText("Voltar");
+        btVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btVoltarActionPerformed(evt);
             }
         });
 
@@ -197,10 +189,10 @@ public class telaClienteGerente extends javax.swing.JFrame {
                         .addComponent(btRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(optEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbProduto))
+                        .addComponent(lbProduto)
+                        .addComponent(btVoltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(rbPFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbPJuridica)
-                    .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(rbPJuridica))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -235,17 +227,18 @@ public class telaClienteGerente extends javax.swing.JFrame {
                         .addComponent(rbPFisica)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rbPJuridica)
-                        .addGap(120, 120, 120)
+                        .addGap(67, 67, 67)
                         .addComponent(btRemoverTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
                         .addComponent(btRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, 0)
-                        .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btVoltar)
-                .addContainerGap(39, Short.MAX_VALUE))
+                        .addComponent(btEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -337,6 +330,10 @@ public class telaClienteGerente extends javax.swing.JFrame {
         tela.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btVoltarActionPerformed
+
+    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btEditar1ActionPerformed
 
     private void verificaCampoNome(String var){
         if(var.isEmpty()){
