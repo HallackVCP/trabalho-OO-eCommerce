@@ -227,8 +227,15 @@ public class telaGerenteCidade extends javax.swing.JFrame {
         String[] dados = data.toString().split(",");
         String cidade = dados[0];
         String estado = dados[1];
+        Estado state = null;
+        for (Estado st:
+                Estado.values()) {
+            if(st.getNome().equals(estado)){
+                state = st;
+            }
+        }
+        Cidade city = new Cidade(cidade, state);
         CidadeController controller = new CidadeController();
-        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
         controller.delete(city);
         model.removeRow(tbCidadeGerente.getSelectedRow());
     }//GEN-LAST:event_btRemoverActionPerformed
@@ -239,8 +246,15 @@ public class telaGerenteCidade extends javax.swing.JFrame {
         String[] dados = data.toString().split(",");
         String cidade = dados[0];
         String estado = dados[1];
+        Estado state = null;
+        for (Estado st:
+                Estado.values()) {
+            if(st.getNome().equals(estado)){
+                state = st;
+            }
+        }
+        Cidade city = new Cidade(cidade, state);
         CidadeController controller = new CidadeController();
-        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
         controller.update(city);
     }//GEN-LAST:event_btEditarActionPerformed
 
