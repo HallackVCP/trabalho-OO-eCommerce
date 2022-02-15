@@ -2,13 +2,13 @@ package br.com.ecommerce.projeto.model.domain.enums;
 
 public enum TipoFuncionario {
 
-    Gerente(1, "Gerente"),
-    Vendedor(2, "Vendedor");
+    Gerente("Gerente", "Gerente"),
+    Vendedor("Vendedor", "Vendedor");
 
-    private int cod;
+    private String cod;
     private String descricao;
 
-    TipoFuncionario(int cod, String descricao) {
+    TipoFuncionario(String cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }
@@ -21,14 +21,14 @@ public enum TipoFuncionario {
         this.descricao = descricao;
     }
 
-    public int getCod() {
+    public String getCod() {
         return cod;
     }
 
-    public void setCod(int cod) {
+    public void setCod(String cod) {
         this.cod = cod;
     }
-    public static TipoFuncionario toEnum(Integer cod) {
+    public static TipoFuncionario toEnum(String cod) {
         if(cod == null) {
             return null;
         }

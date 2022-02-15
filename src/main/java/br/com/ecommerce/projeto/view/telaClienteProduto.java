@@ -61,20 +61,20 @@ public class telaClienteProduto extends javax.swing.JFrame {
         tbProdutoGerente.setBackground(new java.awt.Color(204, 204, 204));
         tbProdutoGerente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Produto", "Quantidade", "Valor"
+                "Produto", "Codigo", "Quantidade", "Valor"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -142,8 +142,9 @@ public class telaClienteProduto extends javax.swing.JFrame {
         String[] dados = data.toString().split(",");
         String prod = dados[0];
         String cod = dados[1];
-        double valor = Double.parseDouble(dados[3]);
-        int qtd = Integer.parseInt(dados[2]);
+        String val = dados[3].replace(']', ' ');
+        double valor = Double.parseDouble(val);
+        int qtd = Integer.parseInt(dados[2].trim());
         Produto produto = new Produto(prod, cod, valor, qtd);
         if(this.cliente.getTipo() == TipoCliente.PESSOAFISICA){
             ClienteCPFService service = new ClienteCPFService(this.cliente);

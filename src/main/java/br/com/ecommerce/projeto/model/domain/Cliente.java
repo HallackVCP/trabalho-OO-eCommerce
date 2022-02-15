@@ -20,15 +20,15 @@ public class Cliente extends Pessoa{
                    Integer tipo, Cidade cidade){
         super(nome, email, cidade);
         this.cpfOuCnpj = cpfOuCnpj;
-        this.tipo = tipo;
-        this.type = TipoCliente.toEnum(tipo);
+        //this.tipo = tipo;
+        //this.type = TipoCliente.toEnum(tipo);
     }
     public Cliente(String nome, String email, String cpfOuCnpj,
                    TipoCliente tipo, Cidade cidade){
         super(nome, email, cidade);
         this.cpfOuCnpj = cpfOuCnpj;
         this.type = tipo;
-        this.tipo = tipo.getCod();
+        //this.tipo = tipo.getCod();
     }
 
 
@@ -42,12 +42,12 @@ public class Cliente extends Pessoa{
     }
 
     public TipoCliente getTipo() {
-        return TipoCliente.toEnum(tipo);
+        return this.type;
     }
 
 
     public void setTipo(TipoCliente tipo) {
-        this.tipo = tipo.getCod();
+        //this.tipo = tipo.getCod();
     }
 
     @Override

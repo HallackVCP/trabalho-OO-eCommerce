@@ -18,15 +18,15 @@ public class Funcionario extends Pessoa{
         super(nome, email, cidade);
         this.matricula = matricula;
         this.tipo = tipo;
-        this.type = TipoFuncionario.toEnum(tipo);
-        this.salario = salario;
+        //this.type = TipoFuncionario.toEnum(tipo);
+        //this.salario = salario;
     }
 
     public Funcionario(String matricula, String nome, String email, TipoFuncionario tipo,
                        Cidade cidade, double salario) {
         super(nome, email, cidade);
         this.matricula = matricula;
-        this.tipo = tipo.getCod();
+        //this.tipo = tipo.getCod();
         this.type = tipo;
         this.salario = salario;
     }
@@ -45,7 +45,7 @@ public class Funcionario extends Pessoa{
 
     public TipoFuncionario getTipo() {
 
-        return TipoFuncionario.toEnum(tipo);
+        return this.type;
     }
 
     public void setTipo(int tipo) {

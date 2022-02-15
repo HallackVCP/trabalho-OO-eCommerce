@@ -2,6 +2,7 @@ package br.com.ecommerce.projeto.model.repositories.implementacao;
 
 import br.com.ecommerce.projeto.model.domain.Cidade;
 import br.com.ecommerce.projeto.model.domain.Funcionario;
+import br.com.ecommerce.projeto.model.domain.enums.Estado;
 import br.com.ecommerce.projeto.model.domain.enums.TipoFuncionario;
 import br.com.ecommerce.projeto.model.repositories.Repository;
 
@@ -29,11 +30,24 @@ public class FuncionarioRepositoryImpl implements Repository<Funcionario> {
             List<String> funcData = Arrays.asList(func.split(","));
             String mat =(funcData.get(0));
             String  tipoFuncionario= funcData.get(3);
-            TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
-            Integer tipo = type.getCod();
+            //TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
+            TipoFuncionario tipo = null;
+            for (TipoFuncionario tp:
+                 TipoFuncionario.values()) {
+                if(tp.getCod().equals(funcData.get(3))){
+                    tipo = tp;
+                }
+            }
             Double sal = Double.parseDouble(funcData.get(6));
             double salario = sal;
-            Cidade cidade = new Cidade(funcData.get(4), funcData.get(5));
+            Estado state = null;
+            for (Estado st:
+                    Estado.values()) {
+                if(st.getNome().equals(funcData.get(5))){
+                    state = st;
+                }
+            }
+            Cidade cidade = new Cidade(funcData.get(4), state);
             Funcionario funcionario1 =
                     new Funcionario(mat, funcData.get(1), funcData.get(2), tipo, cidade, salario);
             funcionarios.add(funcionario1);
@@ -50,14 +64,26 @@ public class FuncionarioRepositoryImpl implements Repository<Funcionario> {
                 List<String> funcData = Arrays.asList(func.split(","));
                 String mat =(funcData.get(0));
                 String  tipoFuncionario= funcData.get(3);
-                TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
-                Integer tipo = type.getCod();
+                //TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
+                TipoFuncionario tipo = null;
+                for (TipoFuncionario tp:
+                        TipoFuncionario.values()) {
+                    if(tp.getCod().equals(funcData.get(3))){
+                        tipo = tp;
+                    }
+                }
                 Double sal = Double.parseDouble(funcData.get(6));
                 double salario = sal;
-                Cidade cidade = new Cidade(funcData.get(4), funcData.get(5));
+                Estado state = null;
+                for (Estado st:
+                        Estado.values()) {
+                    if(st.getNome().equals(funcData.get(5))){
+                        state = st;
+                    }
+                }
+                Cidade cidade = new Cidade(funcData.get(4), state);
                 Funcionario funcionario1 =
-                        new Funcionario(mat, funcData.get(1), funcData.get(2), tipo, cidade, salario);
-                return funcionario1;
+                        new Funcionario(mat, funcData.get(1), funcData.get(2), tipo, cidade, salario);                return funcionario1;
             }
             else{
                 return null;
@@ -75,13 +101,26 @@ public class FuncionarioRepositoryImpl implements Repository<Funcionario> {
 
         while((func = br.readLine())!=null){
             List<String> funcData = Arrays.asList(func.split(","));
-            String mat = (funcData.get(0));
+            String mat =(funcData.get(0));
             String  tipoFuncionario= funcData.get(3);
-            TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
-            Integer tipo = type.getCod();
+            //TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
+            TipoFuncionario tipo = null;
+            for (TipoFuncionario tp:
+                    TipoFuncionario.values()) {
+                if(tp.getCod().equals(funcData.get(3))){
+                    tipo = tp;
+                }
+            }
             Double sal = Double.parseDouble(funcData.get(6));
             double salario = sal;
-            Cidade cidade = new Cidade(funcData.get(4), funcData.get(5));
+            Estado state = null;
+            for (Estado st:
+                    Estado.values()) {
+                if(st.getNome().equals(funcData.get(5))){
+                    state = st;
+                }
+            }
+            Cidade cidade = new Cidade(funcData.get(4), state);
             Funcionario funcionario1 =
                     new Funcionario(mat, funcData.get(1), funcData.get(2), tipo, cidade, salario);
             if(funcionario1.equals(obj)){
@@ -109,13 +148,26 @@ public class FuncionarioRepositoryImpl implements Repository<Funcionario> {
 
         while((func = br.readLine())!=null){
             List<String> funcData = Arrays.asList(func.split(","));
-            String mat = (funcData.get(0));
+            String mat =(funcData.get(0));
             String  tipoFuncionario= funcData.get(3);
-            TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
-            Integer tipo = type.getCod();
+            //TipoFuncionario type = TipoFuncionario.valueOf(tipoFuncionario);
+            TipoFuncionario tipo = null;
+            for (TipoFuncionario tp:
+                    TipoFuncionario.values()) {
+                if(tp.getCod().equals(funcData.get(3))){
+                    tipo = tp;
+                }
+            }
             Double sal = Double.parseDouble(funcData.get(6));
             double salario = sal;
-            Cidade cidade = new Cidade(funcData.get(4), funcData.get(5));
+            Estado state = null;
+            for (Estado st:
+                    Estado.values()) {
+                if(st.getNome().equals(funcData.get(5))){
+                    state = st;
+                }
+            }
+            Cidade cidade = new Cidade(funcData.get(4), state);
             Funcionario funcionario1 =
                     new Funcionario(mat, funcData.get(1), funcData.get(2), tipo, cidade, salario);
             if(funcionario1.equals(obj)){

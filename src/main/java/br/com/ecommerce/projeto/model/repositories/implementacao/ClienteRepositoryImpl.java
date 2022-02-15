@@ -2,6 +2,7 @@ package br.com.ecommerce.projeto.model.repositories.implementacao;
 
 import br.com.ecommerce.projeto.model.domain.Cidade;
 import br.com.ecommerce.projeto.model.domain.Cliente;
+import br.com.ecommerce.projeto.model.domain.enums.Estado;
 import br.com.ecommerce.projeto.model.domain.enums.TipoCliente;
 import br.com.ecommerce.projeto.model.repositories.Repository;
 
@@ -27,13 +28,27 @@ public class ClienteRepositoryImpl implements Repository<Cliente> {
 
         List<Cliente> clientes = new ArrayList<>();
         while((data = br.readLine())!=null){
-            List<String> cliData = Arrays.asList(data.split(","));
-            String cpfOuCnpj = cliData.get(0);
-            String nome = cliData.get(1);
-            String email = cliData.get(2);
-            String tipo = cliData.get(3);
-            TipoCliente type = TipoCliente.valueOf(tipo);
-            Cidade cidade = new Cidade(cliData.get(4), cliData.get(5));
+            //List<String> cliData = Arrays.asList(data.split(","));
+            String[] cliData = data.split(",");
+            String cpfOuCnpj = cliData[0];
+            String nome = cliData[1];
+            String email = cliData[2];
+            String tipo = cliData[3];
+            TipoCliente type = null;
+            for (TipoCliente tp:
+                    TipoCliente.values()) {
+                if(tp.equals(TipoCliente.toEnum(tipo))){
+                    type = tp;
+                }
+            }
+            Estado state = null;
+            for (Estado st:
+                    Estado.values()) {
+                if(st.getNome().equals(cliData[5])){
+                    state = st;
+                }
+            }
+            Cidade cidade = new Cidade(cliData[4], state);
             Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, cidade);
             clientes.add(cliente);
         }
@@ -46,13 +61,27 @@ public class ClienteRepositoryImpl implements Repository<Cliente> {
         String data;
         while((data = br.readLine())!=null){
             if(data.contains(cod)){
-                List<String> cliData = Arrays.asList(data.split(","));
-                String cpfOuCnpj = cliData.get(0);
-                String nome = cliData.get(1);
-                String email = cliData.get(2);
-                String tipo = cliData.get(3);
-                TipoCliente type = TipoCliente.valueOf(tipo);
-                Cidade cidade = new Cidade(cliData.get(4), cliData.get(5));
+                //List<String> cliData = Arrays.asList(data.split(","));
+                String[] cliData = data.split(",");
+                String cpfOuCnpj = cliData[0];
+                String nome = cliData[1];
+                String email = cliData[2];
+                String tipo = cliData[3];
+                TipoCliente type = null;
+                for (TipoCliente tp:
+                        TipoCliente.values()) {
+                    if(tp.equals(TipoCliente.toEnum(tipo))){
+                        type = tp;
+                    }
+                }
+                Estado state = null;
+                for (Estado st:
+                        Estado.values()) {
+                    if(st.getNome().equals(cliData[5])){
+                        state = st;
+                    }
+                }
+                Cidade cidade = new Cidade(cliData[4], state);
                 Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, cidade);
                 return cliente;
             }
@@ -66,17 +95,29 @@ public class ClienteRepositoryImpl implements Repository<Cliente> {
         String data;
         while((data = br.readLine())!=null){
             if(data.contains(obj.getCpfOuCnpj())){
-                List<String> cliData = Arrays.asList(data.split(","));
-                String cpfOuCnpj = cliData.get(0);
-                String nome = cliData.get(1);
-                String email = cliData.get(2);
-                String tipo = cliData.get(3);
-                TipoCliente type = TipoCliente.valueOf(tipo);
-                Cidade cidade = new Cidade(cliData.get(4), cliData.get(5));
-                Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, cidade);
-                if(cliente.equals(obj)){
-                    return cliente;
+                //List<String> cliData = Arrays.asList(data.split(","));
+                String[] cliData = data.split(",");
+                String cpfOuCnpj = cliData[0];
+                String nome = cliData[1];
+                String email = cliData[2];
+                String tipo = cliData[3];
+                TipoCliente type = null;
+                for (TipoCliente tp:
+                        TipoCliente.values()) {
+                    if(tp.equals(TipoCliente.toEnum(tipo))){
+                        type = tp;
+                    }
                 }
+                Estado state = null;
+                for (Estado st:
+                        Estado.values()) {
+                    if(st.getNome().equals(cliData[5])){
+                        state = st;
+                    }
+                }
+                Cidade cidade = new Cidade(cliData[4], state);
+                Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, cidade);
+                return cliente;
             }
         }
         br.close();
@@ -98,13 +139,26 @@ public class ClienteRepositoryImpl implements Repository<Cliente> {
         String data;
         while((data = br.readLine())!=null){
             if(data.contains(obj.getCpfOuCnpj())){
-                List<String> cliData = Arrays.asList(data.split(","));
-                String cpfOuCnpj = cliData.get(0);
-                String nome = cliData.get(1);
-                String email = cliData.get(2);
-                String tipo = cliData.get(3);
-                TipoCliente type = TipoCliente.valueOf(tipo);
-                Cidade cidade = new Cidade(cliData.get(4), cliData.get(5));
+                String[] cliData = data.split(",");
+                String cpfOuCnpj = cliData[0];
+                String nome = cliData[1];
+                String email = cliData[2];
+                String tipo = cliData[3];
+                TipoCliente type = null;
+                for (TipoCliente tp:
+                        TipoCliente.values()) {
+                    if(tp.equals(TipoCliente.toEnum(tipo))){
+                        type = tp;
+                    }
+                }
+                Estado state = null;
+                for (Estado st:
+                        Estado.values()) {
+                    if(st.getNome().equals(cliData[5])){
+                        state = st;
+                    }
+                }
+                Cidade cidade = new Cidade(cliData[4], state);
                 Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, cidade);
                 if(cliente.equals(obj)){
                     delete(cliente);

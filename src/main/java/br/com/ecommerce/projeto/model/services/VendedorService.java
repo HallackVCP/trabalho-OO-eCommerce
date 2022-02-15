@@ -11,7 +11,7 @@ public class VendedorService extends FuncionarioService{
 
     @Override
     public double calculoBonus() {
-        double bonus = (this.funcionario.getSalario() * 0.05)+(this.funcionario.getSalario()/15);
+        double bonus = (this.funcionario.getSalario() * 0.005)+12;
         return bonus;
     }
 }

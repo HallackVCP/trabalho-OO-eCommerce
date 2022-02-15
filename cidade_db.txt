@@ -1,0 +1,4 @@
+Juiz de Fora,Minas Gerais
+Rio de Janeiro,Rio de Janeiro
+Sao Paulo,SÃ£o Paulo
+Natal,Rio Grande do Norte

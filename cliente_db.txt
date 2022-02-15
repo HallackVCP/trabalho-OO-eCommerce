@@ -1,3 +1,5 @@
-
-
-
+76763827008, Vinicius,vsouza@gmail.com,PESSOAFISICA,Teresopolis,Rio de Janeiro
+27479519010, Andre,andre@gmail.com,PESSOAFISICA,Rio Branco,Acre
+0987654321, Vinicius H,viniciush@gmail.com,PESSOAFISICA,Rio Branco,Acre
+9087654321, Joao,joao@email.com,PESSOAJURIDICA,Rio de Janeiro,Rio de Janeiro
+11490952020, JoseInc,jose@gmail.com,PESSOAJURIDICA,Rio Branco,Acre

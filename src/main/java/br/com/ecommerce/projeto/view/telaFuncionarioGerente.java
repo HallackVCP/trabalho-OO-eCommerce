@@ -29,7 +29,7 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
     public telaFuncionarioGerente() throws IOException {
         initComponents();
         setLocationRelativeTo(this);
-        //addAll();
+        addAll();
     }
 
     /**
@@ -294,7 +294,6 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         verificaCampoNome(nome);
         verificaCampoSalario(salario);
         Cidade city = new Cidade(cidade, Estado.valueOf(estado));
-        System.out.println(optFuncao.getSelectedItem().toString());
         TipoFuncionario tipo = TipoFuncionario.valueOf(optFuncao.getSelectedItem().toString());
         double sal = Double.parseDouble(salario);
         Funcionario funcionario = new Funcionario(matricula, nome, email, tipo, city, sal);
@@ -322,9 +321,22 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         String estado = dados[4];
         String salario = dados[5];
         double sal = Double.parseDouble(salario);
-        String funcao = dados[6];
-        TipoFuncionario tipo = TipoFuncionario.valueOf(funcao);
-        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
+        String funcao = dados[6].replace("]", " ");
+        TipoFuncionario tipo = null;
+        for (TipoFuncionario tp:
+                TipoFuncionario.values()) {
+            if(tp.getCod().equals(funcao.trim())){
+                tipo = tp;
+            }
+        }
+        Estado state = null;
+        for (Estado st:
+                Estado.values()) {
+            if(st.getNome().equals(estado)){
+                state = st;
+            }
+        }
+        Cidade city = new Cidade(cidade, state);
         Funcionario funcionario = new Funcionario(matricula, nome, email, tipo, city, sal);
         if(funcionario.getTipo() == TipoFuncionario.Gerente){
             GerenteService service = new GerenteService(funcionario);
@@ -351,16 +363,29 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tbProdutoGerente.getModel();
         Object data = model.getDataVector().elementAt(tbProdutoGerente.getSelectedRow());
         String[] dados = data.toString().split(",");
-        String matricula = dados[0];
         String nome = dados[1];
+        String matricula = dados[0];
         String email = dados[2];
         String cidade = dados[3];
         String estado = dados[4];
         String salario = dados[5];
-        String funcao = dados[6];
         double sal = Double.parseDouble(salario);
-        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
-        TipoFuncionario tipo = TipoFuncionario.valueOf(funcao);
+        String funcao = dados[6].replace("]", " ");
+        TipoFuncionario tipo = null;
+        for (TipoFuncionario tp:
+                TipoFuncionario.values()) {
+            if(tp.getCod().equals(funcao.trim())){
+                tipo = tp;
+            }
+        }
+        Estado state = null;
+        for (Estado st:
+                Estado.values()) {
+            if(st.getNome().equals(estado)){
+                state = st;
+            }
+        }
+        Cidade city = new Cidade(cidade, state);
         Funcionario funcionario = new Funcionario(matricula, nome, email, tipo, city, sal);
         controller.delete(funcionario);
         model.removeRow(tbProdutoGerente.getSelectedRow());
@@ -371,16 +396,29 @@ public class telaFuncionarioGerente extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tbProdutoGerente.getModel();
         Object data = model.getDataVector().elementAt(tbProdutoGerente.getSelectedRow());
         String[] dados = data.toString().split(",");
-        String matricula = dados[0];
         String nome = dados[1];
+        String matricula = dados[0];
         String email = dados[2];
         String cidade = dados[3];
         String estado = dados[4];
         String salario = dados[5];
-        String funcao = dados[6];
         double sal = Double.parseDouble(salario);
-        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
-        TipoFuncionario tipo = TipoFuncionario.valueOf(funcao);
+        String funcao = dados[6].replace("]", " ");
+        TipoFuncionario tipo = null;
+        for (TipoFuncionario tp:
+                TipoFuncionario.values()) {
+            if(tp.getCod().equals(funcao.trim())){
+                tipo = tp;
+            }
+        }
+        Estado state = null;
+        for (Estado st:
+                Estado.values()) {
+            if(st.getNome().equals(estado)){
+                state = st;
+            }
+        }
+        Cidade city = new Cidade(cidade, state);
         Funcionario funcionario = new Funcionario(matricula, nome, email, tipo, city, sal);
         controller.update(funcionario);
     }//GEN-LAST:event_btEditarActionPerformed

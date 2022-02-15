@@ -54,27 +54,29 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btRemoverTodos" min="-2" pref="130" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="tfCPF" max="32767" attributes="0"/>
-                          <Component id="lbCodigo" min="-2" pref="41" max="-2" attributes="0"/>
-                          <Component id="tfNome" max="32767" attributes="0"/>
-                          <Component id="lbQuantidade" min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="tfEmail" max="32767" attributes="0"/>
-                          <Component id="lbValor" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="tfCidade" max="32767" attributes="0"/>
-                          <Component id="lbEstado" min="-2" pref="39" max="-2" attributes="0"/>
-                          <Component id="btAdd" alignment="0" pref="130" max="32767" attributes="0"/>
-                          <Component id="btRemover" max="32767" attributes="0"/>
-                          <Component id="btEditar" max="32767" attributes="0"/>
-                          <Component id="optEstado" alignment="0" max="32767" attributes="0"/>
-                          <Component id="lbProduto" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btVoltar" alignment="1" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btRemoverTodos" min="-2" pref="130" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="tfCPF" max="32767" attributes="0"/>
+                              <Component id="lbCodigo" min="-2" pref="41" max="-2" attributes="0"/>
+                              <Component id="tfNome" max="32767" attributes="0"/>
+                              <Component id="lbQuantidade" min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="tfEmail" max="32767" attributes="0"/>
+                              <Component id="lbValor" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="tfCidade" max="32767" attributes="0"/>
+                              <Component id="lbEstado" min="-2" pref="39" max="-2" attributes="0"/>
+                              <Component id="btAdd" alignment="0" pref="130" max="32767" attributes="0"/>
+                              <Component id="btRemover" max="32767" attributes="0"/>
+                              <Component id="btEditar" max="32767" attributes="0"/>
+                              <Component id="optEstado" alignment="0" max="32767" attributes="0"/>
+                              <Component id="lbProduto" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="btVoltar" alignment="1" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="pfPjLabel" alignment="0" min="-2" pref="98" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="rbPFisica" min="-2" pref="100" max="-2" attributes="0"/>
-                      <Component id="rbPJuridica" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="optPfPj" min="-2" pref="134" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="26" max="32767" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="597" max="-2" attributes="0"/>
@@ -108,11 +110,11 @@
                           <Component id="lbEstado" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                           <Component id="optEstado" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="rbPFisica" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="rbPJuridica" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                          <Component id="pfPjLabel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="optPfPj" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                           <Component id="btRemoverTodos" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btAdd" min="-2" pref="40" max="-2" attributes="0"/>
@@ -125,7 +127,7 @@
                           <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="24" max="32767" attributes="0"/>
+                  <EmptySpace pref="68" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -292,22 +294,6 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JRadioButton" name="rbPFisica">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Pessoa Fisica"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbPFisicaActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JRadioButton" name="rbPJuridica">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Pessoa Juridica"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbPJuridicaActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="btRemoverTodos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Remover todos"/>
@@ -323,6 +309,24 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btVoltarActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="pfPjLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="PF/PJ"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="optPfPj">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="2">
+                <StringItem index="0" value="PESSOAFISICA"/>
+                <StringItem index="1" value="PESSOAFISICA"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

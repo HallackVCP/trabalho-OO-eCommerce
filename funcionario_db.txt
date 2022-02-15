@@ -1,2 +1,3 @@
-
-
+09775196000, Joao,joao@email.com,Gerente,Juiz de Fora,Minas Gerais,2100.5
+91750202, Vincius Hallack,vinicius@gmail.com,Gerente,Juiz de Fora,Minas Gerais,10000.0
+0001, Jose Silva,zesilva@email.com,Vendedor,Rio de Janeiro,Rio de Janeiro,80000.99

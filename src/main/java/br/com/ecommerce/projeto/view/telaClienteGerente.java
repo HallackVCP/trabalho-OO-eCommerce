@@ -9,10 +9,12 @@ import br.com.ecommerce.projeto.model.domain.Cidade;
 import br.com.ecommerce.projeto.model.domain.Cliente;
 import br.com.ecommerce.projeto.model.domain.enums.Estado;
 import br.com.ecommerce.projeto.model.domain.enums.TipoCliente;
+import br.com.ecommerce.projeto.model.domain.enums.TipoFuncionario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.io.IOException;
+import java.util.List;
 
 /**
  *
@@ -25,12 +27,11 @@ public class telaClienteGerente extends javax.swing.JFrame {
      */
 
     TipoCliente tipo;
-    public telaClienteGerente() {
+    public telaClienteGerente() throws IOException {
         initComponents();
         setLocationRelativeTo(this);
-        ButtonGroup group = new ButtonGroup();
-        group.add(rbPFisica);
-        group.add(rbPJuridica);
+        addAll();
+
     }
 
     /**
@@ -58,10 +59,10 @@ public class telaClienteGerente extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbClienteGerente = new javax.swing.JTable();
         optEstado = new javax.swing.JComboBox<>();
-        rbPFisica = new javax.swing.JRadioButton();
-        rbPJuridica = new javax.swing.JRadioButton();
         btRemoverTodos = new javax.swing.JButton();
         btVoltar = new javax.swing.JButton();
+        pfPjLabel = new javax.swing.JLabel();
+        optPfPj = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(790, 700));
@@ -76,21 +77,33 @@ public class telaClienteGerente extends javax.swing.JFrame {
         btEditar.setText("Editar");
         btEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btEditarActionPerformed(evt);
+                try {
+                    btEditarActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         btAdd.setText("Adicionar");
         btAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAddActionPerformed(evt);
+                try {
+                    btAddActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         btRemover.setText("Remover");
         btRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRemoverActionPerformed(evt);
+                try {
+                    btRemoverActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -140,24 +153,14 @@ public class telaClienteGerente extends javax.swing.JFrame {
 
         optEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
 
-        rbPFisica.setText("Pessoa Fisica");
-        rbPFisica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbPFisicaActionPerformed(evt);
-            }
-        });
-
-        rbPJuridica.setText("Pessoa Juridica");
-        rbPJuridica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbPJuridicaActionPerformed(evt);
-            }
-        });
-
         btRemoverTodos.setText("Remover todos");
         btRemoverTodos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btRemoverTodosActionPerformed(evt);
+                try {
+                    btRemoverTodosActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -168,31 +171,36 @@ public class telaClienteGerente extends javax.swing.JFrame {
             }
         });
 
+        pfPjLabel.setText("PF/PJ");
+
+        optPfPj.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PESSOAFISICA", "PESSOAFISICA" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btRemoverTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tfCPF)
-                        .addComponent(lbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tfNome)
-                        .addComponent(lbQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tfEmail)
-                        .addComponent(lbValor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tfCidade)
-                        .addComponent(lbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                        .addComponent(btRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(optEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbProduto)
-                        .addComponent(btVoltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(rbPFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rbPJuridica))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btRemoverTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tfCPF)
+                            .addComponent(lbCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfNome)
+                            .addComponent(lbQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfEmail)
+                            .addComponent(lbValor, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfCidade)
+                            .addComponent(lbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(btRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(optEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbProduto)
+                            .addComponent(btVoltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(pfPjLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(optPfPj, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23))
@@ -223,11 +231,11 @@ public class telaClienteGerente extends javax.swing.JFrame {
                         .addComponent(lbEstado)
                         .addGap(8, 8, 8)
                         .addComponent(optEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(rbPFisica)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(rbPJuridica)
-                        .addGap(67, 67, 67)
+                        .addGap(16, 16, 16)
+                        .addComponent(pfPjLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(optPfPj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
                         .addComponent(btRemoverTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -238,7 +246,7 @@ public class telaClienteGerente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(7, 7, 7)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1);
@@ -257,7 +265,7 @@ public class telaClienteGerente extends javax.swing.JFrame {
         String email = tfEmail.getText();
         String cidade = tfCidade.getText();
         String estado = optEstado.getSelectedItem().toString();
-        TipoCliente type = this.tipo;
+        TipoCliente type = TipoCliente.valueOf(optPfPj.getSelectedItem().toString());
         Cidade city = new Cidade(cidade, Estado.valueOf(estado));
         Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, city);
         ClienteController controller = new ClienteController();
@@ -269,18 +277,6 @@ public class telaClienteGerente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btAddActionPerformed
 
-    private void rbPFisicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPFisicaActionPerformed
-        if(rbPJuridica.isSelected()){
-            this.tipo = TipoCliente.PESSOAJURIDICA;
-        }
-    }//GEN-LAST:event_rbPFisicaActionPerformed
-
-    private void rbPJuridicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPJuridicaActionPerformed
-        if(rbPFisica.isSelected()){
-            this.tipo = TipoCliente.PESSOAFISICA;
-        }
-    }//GEN-LAST:event_rbPJuridicaActionPerformed
-
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) throws IOException {//GEN-FIRST:event_btRemoverActionPerformed
         DefaultTableModel model = (DefaultTableModel) tbClienteGerente.getModel();
         Object data = model.getDataVector().elementAt(tbClienteGerente.getSelectedRow());
@@ -290,10 +286,23 @@ public class telaClienteGerente extends javax.swing.JFrame {
         String email = dados[2];
         String cidade = dados[3];
         String estado = dados[4];
-        String tipoCli = dados[5];
-        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
-        TipoCliente type = TipoCliente.valueOf(tipoCli);
-        Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, city);
+        String tipoCli = dados[5].replace("]", " ");
+        TipoCliente tipo = null;
+        for (TipoCliente tp:
+                TipoCliente.values()) {
+            if(tp.getCod().equals(tipoCli.trim())){
+                tipo = tp;
+            }
+        }
+        Estado state = null;
+        for (Estado st:
+                Estado.values()) {
+            if(st.getNome().equals(estado)){
+                state = st;
+            }
+        }
+        Cidade city = new Cidade(cidade, state);
+        Cliente cliente = new Cliente(nome, email, cpfOuCnpj, tipo, city);
         ClienteController controller = new ClienteController();
         controller.delete(cliente);
         model.removeRow(tbClienteGerente.getSelectedRow());
@@ -308,10 +317,23 @@ public class telaClienteGerente extends javax.swing.JFrame {
         String email = dados[2];
         String cidade = dados[3];
         String estado = dados[4];
-        String tipoCli = dados[5];
-        Cidade city = new Cidade(cidade, Estado.valueOf(estado));
-        TipoCliente type = TipoCliente.valueOf(tipoCli);
-        Cliente cliente = new Cliente(nome, email, cpfOuCnpj, type, city);
+        String tipoCli = dados[5].replace("]", " ");
+        TipoCliente tipo = null;
+        for (TipoCliente tp:
+                TipoCliente.values()) {
+            if(tp.getCod().equals(tipoCli.trim())){
+                tipo = tp;
+            }
+        }
+        Estado state = null;
+        for (Estado st:
+                Estado.values()) {
+            if(st.getNome().equals(estado)){
+                state = st;
+            }
+        }
+        Cidade city = new Cidade(cidade, state);
+        Cliente cliente = new Cliente(nome, email, cpfOuCnpj, tipo, city);
         ClienteController controller = new ClienteController();
         controller.update(cliente);
     }//GEN-LAST:event_btEditarActionPerformed
@@ -331,9 +353,7 @@ public class telaClienteGerente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btVoltarActionPerformed
 
-    private void btVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditar1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btEditar1ActionPerformed
+
 
     private void verificaCampoNome(String var){
         if(var.isEmpty()){
@@ -365,6 +385,17 @@ public class telaClienteGerente extends javax.swing.JFrame {
         }
         else{
             JOptionPane.showMessageDialog(null, "Campo Cidade Preenchido com sucesso!");
+        }
+    }
+    public void addAll() throws IOException {
+        ClienteController controller = new ClienteController();
+        DefaultTableModel model = (DefaultTableModel) tbClienteGerente.getModel();
+        List<Cliente> clientes  = controller.findAll();
+        for (Cliente cliente:
+             clientes) {
+            model.addRow(new Object[]{cliente.getCpfOuCnpj(), cliente.getNome(), cliente.getEmail(),
+            cliente.getCidade().getNome(), cliente.getCidade().getEstado().getNome(),
+            cliente.getTipo()});
         }
     }
 
@@ -403,7 +434,11 @@ public class telaClienteGerente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new telaClienteGerente().setVisible(true);
+                try {
+                    new telaClienteGerente().setVisible(true);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -422,8 +457,8 @@ public class telaClienteGerente extends javax.swing.JFrame {
     private javax.swing.JLabel lbQuantidade;
     private javax.swing.JLabel lbValor;
     private javax.swing.JComboBox<String> optEstado;
-    private javax.swing.JRadioButton rbPFisica;
-    private javax.swing.JRadioButton rbPJuridica;
+    private javax.swing.JComboBox<String> optPfPj;
+    private javax.swing.JLabel pfPjLabel;
     private javax.swing.JTable tbClienteGerente;
     private javax.swing.JTextField tfCPF;
     private javax.swing.JTextField tfCidade;

@@ -2,13 +2,13 @@ package br.com.ecommerce.projeto.model.domain.enums;
 
 public enum TipoCliente {
 
-    PESSOAFISICA(1, "Pessoa física"),
-    PESSOAJURIDICA(2, "Pessoa jurídica");
+    PESSOAFISICA("PESSOAFISICA", "Pessoa física"),
+    PESSOAJURIDICA("PESSOAJURIDICA", "Pessoa jurídica");
 
-    private int cod;
+    private String cod;
     private String descricao;
 
-    TipoCliente(int cod, String descricao) {
+    TipoCliente(String cod, String descricao) {
         this.cod = cod;
         this.descricao = descricao;
     }
@@ -21,14 +21,14 @@ public enum TipoCliente {
         this.descricao = descricao;
     }
 
-    public int getCod() {
+    public String getCod() {
         return cod;
     }
 
-    public void setCod(int cod) {
+    public void setCod(String cod) {
         this.cod = cod;
     }
-    public static TipoCliente toEnum(Integer cod) {
+    public static TipoCliente toEnum(String cod) {
         if(cod == null) {
             return null;
         }

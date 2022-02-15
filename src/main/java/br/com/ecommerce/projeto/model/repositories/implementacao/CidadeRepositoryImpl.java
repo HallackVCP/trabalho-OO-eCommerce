@@ -1,6 +1,7 @@
 package br.com.ecommerce.projeto.model.repositories.implementacao;
 
 import br.com.ecommerce.projeto.model.domain.Cidade;
+import br.com.ecommerce.projeto.model.domain.enums.Estado;
 import br.com.ecommerce.projeto.model.repositories.Repository;
 
 import java.io.*;
@@ -25,11 +26,20 @@ public class CidadeRepositoryImpl implements Repository<Cidade> {
         String data;
         List<Cidade> cidades = new ArrayList<>();
         while((data=br.readLine())!=null){
-            List<String> cdData = Arrays.asList(data.split(","));
-            String nome = cdData.get(0);
-            String estado = cdData.get(1);
-            Cidade cidade = new Cidade(nome, estado);
+            //List<String> cdData = Arrays.asList(data.split(","));
+            String[] cdData= data.split(",");
+            String nome = cdData[0];
+            String estado = cdData[1];
+            Estado state = null;
+            for (Estado st:
+                 Estado.values()) {
+                if(st.getNome().equals(estado)){
+                    state = st;
+                }
+            }
+            Cidade cidade = new Cidade(nome, state);
             cidades.add(cidade);
+
         }
         return cidades;
     }
@@ -42,7 +52,14 @@ public class CidadeRepositoryImpl implements Repository<Cidade> {
                 List<String> cdData = Arrays.asList(data.split(","));
                 String nome = cdData.get(0);
                 String estado = cdData.get(1);
-                Cidade cidade = new Cidade(nome, estado);
+                Estado state = null;
+                for (Estado st:
+                        Estado.values()) {
+                    if(st.getNome().equals(estado)){
+                        state = st;
+                    }
+                }
+                Cidade cidade = new Cidade(nome, state);
                 return cidade;
             }
         }
@@ -81,10 +98,18 @@ public class CidadeRepositoryImpl implements Repository<Cidade> {
         String data;
         while((data = br.readLine())!=null){
             if((data.contains(obj.getNome()))&&(data.contains(obj.getEstado().getNome()))){
-                List<String> cdData = Arrays.asList(data.split(","));
-                String nome = cdData.get(0);
-                String estado = cdData.get(1);
-                Cidade cidade = new Cidade(nome, estado);
+                //List<String> cdData = Arrays.asList(data.split(","));
+                String[] cdData= data.split(",");
+                String nome = cdData[0];
+                String estado = cdData[1];
+                Estado state = null;
+                for (Estado st:
+                        Estado.values()) {
+                    if(st.getNome().equals(estado)){
+                        state = st;
+                    }
+                }
+                Cidade cidade = new Cidade(nome, state);
                 if(obj.equals(cidade)){
                     delete(cidade);
                     save(obj);
